@@ -35,16 +35,6 @@ class CLI
     @output.puts "X, take your turn"
   end
 
-=begin
-  def print_board
-    @output.puts  " #{@game.check_space(1)} | #{@game.check_space(2)} | #{@game.check_space(3)}\n" +
-                  "-" * 9 +
-                  "\n #{@game.check_space(4)} | #{@game.check_space(5)} | #{@game.check_space(6)}\n" +
-                  "-" * 9 +
-                  "\n #{@game.check_space(7)} | #{@game.check_space(8)} | #{@game.check_space(9)}"
-  end
-=end
-
   def print_board
     split_board = @game.board.spaces.each_slice(3)
     split_board.each_with_index do |row, row_index|
@@ -55,12 +45,12 @@ class CLI
         else
           single_row += " #{space} |"
         end
-    end
+      end
       if row_index == row.size - 1
-        @output.puts single_row
+          @output.puts single_row
       else
-        @output.puts single_row + "\n" + "-" * single_row.length
-    end
+          @output.puts single_row + "\n" + "-" * single_row.length
+      end
     end
   end
 
