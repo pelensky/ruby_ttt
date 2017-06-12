@@ -19,5 +19,16 @@ RSpec.describe Game do
       expect(game.player2).to eq player2
     end
 
+    it "has a starting player of X" do
+      expect(game.current_player).to eq player1
+    end
+
+  end
+
+  context "A user can" do
+    it "place their marker" do
+      game.take_turn(1)
+      expect(game.check_space(1)).to eq "X"
+    end
   end
 end

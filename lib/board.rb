@@ -13,4 +13,8 @@ class Board
     @spaces[space - OFFSET] = marker
   end
 
+  def check_space(space)
+    @spaces[space - OFFSET]
+  end
+
 end

@@ -15,7 +15,7 @@ RSpec.describe Board do
 
     it "place a marker in a space" do
       board.place_marker(1, "X")
-      expect(board.spaces[0]).to eq "X"
+      expect(board.check_space(1)).to eq "X"
     end
 
   end
