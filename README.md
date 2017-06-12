@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/pelensky/ruby_ttt.svg?branch=master)](https://travis-ci.org/pelensky/ruby_ttt)
+[![Coverage Status](https://coveralls.io/repos/github/pelensky/ruby_ttt/badge.svg?branch=place_marker)](https://coveralls.io/github/pelensky/ruby_ttt?branch=place_marker)
 
 ## Ruby Tic Tac Toe 
 
