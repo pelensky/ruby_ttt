@@ -15,8 +15,17 @@ RSpec.describe CLI do
 
   context "On launch the app" do
     it "welcomes the user" do
-      cli = setup_app("1")
+      setup_app("1")
       expect(output.string).to include("Tic Tac Toe")
+    end
+
+    it "gives player 1 the chance to go first" do
+      setup_app("1")
+      expect(output.string).to include(" 1 | 2 | 3\n" +
+                                       "-" * 9 +
+                                      "\n 4 | 5 | 6\n" +
+                                      "-" * 9 +
+                                      "\n 7 | 8 | 9")
     end
   end
 
