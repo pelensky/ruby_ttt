@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/pelensky/ruby_ttt.svg?branch=master)](https://travis-ci.org/pelensky/ruby_ttt)
+
 ## Ruby Tic Tac Toe 
 
 This is a simple Tic Tac Toe game built in Ruby.
