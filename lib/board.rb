@@ -17,4 +17,8 @@ class Board
     @spaces[space - OFFSET]
   end
 
+  def split_board_into_rows
+    
+  end
+
 end

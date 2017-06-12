@@ -1,6 +1,3 @@
-require 'game'
-require 'board'
-require 'player'
 require 'cli'
 require 'stringio'
 
@@ -19,12 +16,26 @@ RSpec.describe CLI do
       expect(output.string).to include("Tic Tac Toe")
     end
 
-    it "gives player 1 the chance to go first" do
+    it "tells the user it is their turn" do
+      setup_app("1")
+      expect(output.string).to include("X, take your turn")
+    end
+
+    it "prints the board" do
       setup_app("1")
       expect(output.string).to include(" 1 | 2 | 3\n" +
-                                       "-" * 9 +
+                                       "-" * 10 +
                                       "\n 4 | 5 | 6\n" +
-                                      "-" * 9 +
+                                      "-" * 10 +
+                                      "\n 7 | 8 | 9")
+    end
+
+    it "shows the user the board after taking their turn" do
+      setup_app("1")
+      expect(output.string).to include(" X | 2 | 3\n" +
+                                       "-" * 10 +
+                                      "\n 4 | 5 | 6\n" +
+                                      "-" * 10 +
                                       "\n 7 | 8 | 9")
     end
   end

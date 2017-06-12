@@ -1,3 +1,6 @@
+require_relative 'board'
+require_relative 'player'
+
 class CLI
 
   def initialize(input=$stdin, output=$stdout)
@@ -12,6 +15,9 @@ class CLI
     print_welcome
     setup_game
     print_board
+    print_players_turn
+    take_turn
+    print_board
   end
 
   def setup_game
@@ -25,12 +31,41 @@ class CLI
     @output.puts "Tic Tac Toe"
   end
 
+  def print_players_turn
+    @output.puts "X, take your turn"
+  end
+
+=begin
   def print_board
-    @output.puts  " 1 | 2 | 3\n" +
+    @output.puts  " #{@game.check_space(1)} | #{@game.check_space(2)} | #{@game.check_space(3)}\n" +
                   "-" * 9 +
-                  "\n 4 | 5 | 6\n" +
+                  "\n #{@game.check_space(4)} | #{@game.check_space(5)} | #{@game.check_space(6)}\n" +
                   "-" * 9 +
-                  "\n 7 | 8 | 9"
+                  "\n #{@game.check_space(7)} | #{@game.check_space(8)} | #{@game.check_space(9)}"
+  end
+=end
+
+  def print_board
+    split_board = @game.board.spaces.each_slice(3)
+    split_board.each_with_index do |row, row_index|
+      single_row = ""
+      row.each_with_index do |space, space_index|
+        if space_index == split_board.size - 1
+          single_row += " #{space}"
+        else
+          single_row += " #{space} |"
+        end
+    end
+      if row_index == row.size - 1
+        @output.puts single_row
+      else
+        @output.puts single_row + "\n" + "-" * single_row.length
+    end
+    end
+  end
+
+  def take_turn
+    @game.take_turn(@input.gets.chomp.to_i)
   end
 
 end
