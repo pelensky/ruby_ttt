@@ -1,6 +1,7 @@
 class Board
 
   attr_reader :spaces
+ 
 
   def initialize(number_of_spaces)
     @number_of_spaces = number_of_spaces
