@@ -13,9 +13,10 @@ RSpec.describe Board do
 
   context "A user can" do
 
-    it "place a marker if the space is free" do
+    it "place a marker in a space" do
       board.place_marker(1, "X")
       expect(board.spaces[0]).to eq "X"
     end
+
   end
 end
