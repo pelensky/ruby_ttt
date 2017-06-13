@@ -25,5 +25,8 @@ class Board
     @spaces.each_slice(3).to_a
   end
 
+  def split_into_columns
+    split_into_rows.transpose
+  end
 
 end
