@@ -13,12 +13,11 @@ class CLI
   private
 
   def run_app
-    print_welcome
-    setup_game
-    print_board
-    print_players_turn
-    take_turn
-    print_board
+    print_start_of_game
+    until @game.game_over?
+      single_turn
+    end
+    print_game_over
   end
 
   def setup_game
@@ -28,12 +27,24 @@ class CLI
     @game = Game.new(board, player1, player2)
   end
 
+  def print_start_of_game
+    print_welcome
+    setup_game
+    print_board
+  end
+
+  def single_turn
+    print_players_turn
+    take_turn
+    print_board
+  end
+
   def print_welcome
     @output.puts "Tic Tac Toe"
   end
 
   def print_players_turn
-    @output.puts "X, take your turn"
+    @output.puts "#{@game.current_player.marker}, take your turn"
   end
 
   def print_board
@@ -53,6 +64,10 @@ class CLI
           @output.puts single_row + "\n" + "-" * single_row.length
       end
     end
+  end
+
+  def print_game_over
+    @output.puts "Game Over"
   end
 
   def take_turn
