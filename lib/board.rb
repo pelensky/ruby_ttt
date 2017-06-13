@@ -21,5 +21,9 @@ class Board
     @spaces.select {|space| space.is_a? Integer}
   end
 
+  def split_into_rows
+    @spaces.each_slice(3).to_a
+  end
+
 
 end

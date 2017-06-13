@@ -25,5 +25,9 @@ RSpec.describe Board do
       board.place_marker(1, "X")
       expect(board.check_available_spaces).to eq [2, 3, 4, 5, 6, 7, 8, 9]
     end
+
+    it "can be split into rows" do
+      expect(board.split_into_rows).to eq [[1,2,3], [4,5,6], [7,8,9]]
+    end
   end
 end
