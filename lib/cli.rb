@@ -17,7 +17,7 @@ class CLI
     until @game.game_over?
       single_turn
     end
-    print_game_over
+    print_outcome
   end
 
   def setup_game
@@ -72,6 +72,11 @@ class CLI
 
   def take_turn
     @game.take_turn(@input.gets.chomp.to_i)
+  end
+
+  def print_outcome
+    print_game_over
+    @output.puts @game.winner ? "#{@game.winner.marker} is the winner" : "Tied Game"
   end
 
 end

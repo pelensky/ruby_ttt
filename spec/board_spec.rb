@@ -25,5 +25,17 @@ RSpec.describe Board do
       board.place_marker(1, "X")
       expect(board.check_available_spaces).to eq [2, 3, 4, 5, 6, 7, 8, 9]
     end
+
+    it "can be split into rows" do
+      expect(board.split_into_lines).to include [1,2,3], [4,5,6], [7,8,9]
+    end
+
+    it "can be split into columns" do
+      expect(board.split_into_lines).to include [1,4,7], [2,5,8], [3,6,9]
+    end
+
+    it "can be split into diagonals" do
+      expect(board.split_into_lines).to include [1,5,9], [7,5,3]
+    end
   end
 end

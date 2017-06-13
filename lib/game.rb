@@ -1,6 +1,6 @@
 class Game
 
-  attr_reader :board, :player1, :player2, :current_player
+  attr_reader :board, :player1, :player2, :current_player, :winner
 
   def initialize(board, player1, player2)
     @board = board
@@ -21,7 +21,7 @@ class Game
   end
 
   def game_over?
-    @board.check_available_spaces.empty?
+    game_tied? || game_won_by?(@player1) || game_won_by?(@player2)
   end
 
   private
@@ -32,6 +32,20 @@ class Game
 
   def space_available?(space)
     @board.check_available_spaces.include? space
+  end
+
+  def game_tied?
+    @board.check_available_spaces.empty?
+  end
+
+  def game_won_by?(player)
+    @board.split_into_lines.any? do |line|
+      set_winner(player) if line.all? {|space| space == player.marker}
+    end
+  end
+
+  def set_winner(player)
+    @winner = player
   end
 
 end

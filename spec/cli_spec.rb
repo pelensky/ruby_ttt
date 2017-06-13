@@ -47,6 +47,12 @@ RSpec.describe CLI do
     it "goes on until the game has been tied" do
       setup_app("1\n5\n3\n2\n8\n9\n7\n4\n6\n")
       expect(output.string).to include "Game Over"
+      expect(output.string).to include "Tied Game"
+    end
+
+    it "goes on until the game has been won" do
+      setup_app("1\n5\n9\n3\n7\n8\n4\n")
+      expect(output.string).to include "X is the winner"
     end
   end
 
