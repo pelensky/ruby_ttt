@@ -22,8 +22,8 @@ class CLI
 
   def setup_game
     board = Board.new(3)
-    player1 = Player.new("X")
-    player2 = Player.new("O")
+    player1 = Player.new("X", self)
+    player2 = Player.new("O", self)
     @game = Game.new(board, player1, player2)
   end
 

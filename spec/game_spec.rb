@@ -4,8 +4,8 @@ require 'player'
 
 RSpec.describe Game do
   let (:board) { Board.new(3) }
-  let (:player1) { Player.new("X") }
-  let (:player2) { Player.new("O") }
+  let (:player1) { Player.new("X", double('cli')) }
+  let (:player2) { Player.new("O", double('cli')) }
   subject(:game) { described_class.new(board, player1, player2) }
 
   context "At setup, the game" do

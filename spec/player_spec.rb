@@ -2,7 +2,7 @@ require 'player'
 
 RSpec.describe Player do
 
-  subject(:player) { described_class.new("X") }
+  subject(:player) { described_class.new("X", double("cli")) }
 
   context "At setup, a player" do
 
