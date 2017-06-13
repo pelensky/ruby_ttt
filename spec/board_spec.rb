@@ -19,4 +19,11 @@ RSpec.describe Board do
     end
 
   end
+
+  context "The board" do
+    it "tracks available spaces" do
+      board.place_marker(1, "X")
+      expect(board.check_available_spaces).to eq [2, 3, 4, 5, 6, 7, 8, 9]
+    end
+  end
 end

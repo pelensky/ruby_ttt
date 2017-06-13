@@ -26,9 +26,22 @@ RSpec.describe Game do
   end
 
   context "A user can" do
-    it "place their marker" do
+    it "place their marker in an available space" do
       game.take_turn(1)
       expect(game.check_space(1)).to eq "X"
+    end
+
+    it "not place their marker in a taken space" do
+      game.take_turn(1)
+      game.take_turn(1)
+      expect(game.check_space(1)).to eq "X"
+    end
+  end
+
+  context "After a valid move" do
+    it "changes the current player" do
+      game.take_turn(9)
+      expect(game.current_player.marker).to eq "O"
     end
   end
 end
