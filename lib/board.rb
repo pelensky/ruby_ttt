@@ -3,7 +3,6 @@ class Board
   OFFSET = 1
 
   attr_reader :spaces
- 
 
   def initialize(number_of_spaces)
     @number_of_spaces = number_of_spaces
@@ -18,8 +17,9 @@ class Board
     @spaces[space - OFFSET]
   end
 
-  def split_board_into_rows
-    
+  def check_available_spaces
+    @spaces.select {|space| space.is_a? Integer}
   end
+
 
 end
