@@ -3,9 +3,9 @@ require 'board'
 require 'player'
 
 RSpec.describe Game do
-  board = Board.new(3)
-  player1 = Player.new("X")
-  player2 = Player.new("O")
+  let (:board) { Board.new(3) }
+  let (:player1) { Player.new("X") }
+  let (:player2) { Player.new("O") }
   subject(:game) { described_class.new(board, player1, player2) }
 
   context "At setup, the game" do
@@ -32,8 +32,7 @@ RSpec.describe Game do
     end
 
     it "not place their marker in a taken space" do
-      game.take_turn(1)
-      game.take_turn(1)
+      take_multiple_turns([1,1])
       expect(game.check_space(1)).to eq "X"
     end
   end
@@ -52,8 +51,16 @@ RSpec.describe Game do
     end
 
     it "player 1 wins" do
-      take_multiple_turns([1,5,7,3,7,8,4])
+      take_multiple_turns([1,5,9,3,7,8,4])
+      p game.board.spaces
       expect(game.game_over?).to be true
+      expect(game.winner).to eq player1
+    end
+
+    it "player 2 wins" do
+    take_multiple_turns([1,5,2,3,6,7])
+    expect(game.game_over?).to be true
+    expect(game.winner).to eq player2
     end
   end
 
