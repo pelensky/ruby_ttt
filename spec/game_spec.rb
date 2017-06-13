@@ -52,7 +52,6 @@ RSpec.describe Game do
 
     it "player 1 wins" do
       take_multiple_turns([1,5,9,3,7,8,4])
-      p game.board.spaces
       expect(game.game_over?).to be true
       expect(game.winner).to eq player1
     end
