@@ -1,6 +1,6 @@
 class SimpleComputer
 
-  def take_turn(available_spaces)
+  def choose_available_space(available_spaces)
     available_spaces.sample
   end
 
