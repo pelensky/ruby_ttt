@@ -9,11 +9,9 @@ class Game
     @current_player = player1
   end
 
-  def take_turn(space)
-    if space_available?(space)
-      @board.place_marker(space, @current_player.marker)
-      change_turns
-    end
+  def take_turn
+    @board.place_marker(@current_player.choose_available_space(@board.check_available_spaces), @current_player.marker)
+    change_turns
   end
 
   def check_space(space)

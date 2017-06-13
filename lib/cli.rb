@@ -10,6 +10,15 @@ class CLI
     run_app
   end
 
+  def choose_available_space(available_spaces)
+    choice = @input.gets.chomp.to_i
+    if available_spaces.include? choice
+      choice
+    else
+      @output.puts "Invalid Selection"
+    end
+  end
+
   private
 
   def run_app
@@ -71,7 +80,7 @@ class CLI
   end
 
   def take_turn
-    @game.take_turn(@input.gets.chomp.to_i)
+    @game.take_turn
   end
 
   def print_outcome
