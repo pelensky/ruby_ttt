@@ -44,4 +44,19 @@ RSpec.describe Game do
       expect(game.current_player.marker).to eq "O"
     end
   end
+
+  context "The game is over when" do
+    it "all spaces are filled"  do
+      game.take_turn(1)
+      game.take_turn(5)
+      game.take_turn(3)
+      game.take_turn(2)
+      game.take_turn(8)
+      game.take_turn(9)
+      game.take_turn(7)
+      game.take_turn(4)
+      game.take_turn(6)
+      expect(game.game_over?).to be true
+    end
+  end
 end
