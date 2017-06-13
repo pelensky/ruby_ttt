@@ -27,11 +27,15 @@ RSpec.describe Board do
     end
 
     it "can be split into rows" do
-      expect(board.split_into_rows).to eq [[1,2,3], [4,5,6], [7,8,9]]
+      expect(board.split_into_lines).to include [1,2,3], [4,5,6], [7,8,9]
     end
 
     it "can be split into columns" do
-      expect(board.split_into_columns).to eq [[1,4,7], [2,5,8], [3,6,9]]
+      expect(board.split_into_lines).to include [1,4,7], [2,5,8], [3,6,9]
+    end
+
+    it "can be split into diagonals" do
+      expect(board.split_into_lines).to include [1,5,9], [7,5,3]
     end
   end
 end
