@@ -45,18 +45,19 @@ RSpec.describe Game do
     end
   end
 
-  context "The game is over when" do
+   context "The game is over when" do
     it "all spaces are filled"  do
-      game.take_turn(1)
-      game.take_turn(5)
-      game.take_turn(3)
-      game.take_turn(2)
-      game.take_turn(8)
-      game.take_turn(9)
-      game.take_turn(7)
-      game.take_turn(4)
-      game.take_turn(6)
+      take_multiple_turns([1,5,3,2,8,9,7,4,6])
+      expect(game.game_over?).to be true
+    end
+
+    it "player 1 wins" do
+      take_multiple_turns([1,5,7,3,7,8,4])
       expect(game.game_over?).to be true
     end
   end
+
+   def take_multiple_turns(moves)
+     moves.each {|space| game.take_turn(space)}
+   end
 end
