@@ -10,7 +10,7 @@ class Game
   end
 
   def take_turn
-    @board.place_marker(@current_player.choose_available_space(@board.check_available_spaces), @current_player.marker)
+    @board = @board.place_marker(@current_player.choose_available_space(@board.check_available_spaces), @current_player.marker)
     change_turns
   end
 

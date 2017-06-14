@@ -4,13 +4,15 @@ class Board
 
   attr_accessor :spaces
 
-  def initialize(number_of_spaces)
-    @number_of_spaces = number_of_spaces
-    @spaces = (1..9).to_a
+  def initialize(spaces)
+    @spaces = spaces
+    @number_of_rows = Math.sqrt(spaces.count)
   end
 
   def place_marker(space, marker)
-    @spaces[space - OFFSET] = marker
+    spaces = @spaces
+    spaces[space - OFFSET] = marker
+    Board.new(spaces)
   end
 
   def check_space(space)
@@ -32,7 +34,7 @@ class Board
   private
 
   def split_into_rows
-    @spaces.each_slice(3).to_a
+    @spaces.each_slice(@number_of_rows).to_a
   end
 
   def split_into_columns
@@ -45,10 +47,10 @@ class Board
   end
 
   def split_left_diagonal
-    (0..@number_of_spaces - 1).map {|position| split_into_rows[position][position]}
+    (0..@number_of_rows - 1).map {|position| split_into_rows[position][position]}
   end
 
   def split_right_diagonal
-    (0..@number_of_spaces - 1).map {|position| split_into_rows.reverse[position][position]}
+    (0..@number_of_rows - 1).map {|position| split_into_rows.reverse[position][position]}
   end
 end

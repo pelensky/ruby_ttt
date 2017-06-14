@@ -31,7 +31,7 @@ class CLI
   end
 
   def setup_board
-    Board.new(3)
+    Board.new((1..9).to_a)
   end
 
   def choose_player(marker)
