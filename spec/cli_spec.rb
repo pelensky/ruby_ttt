@@ -49,6 +49,11 @@ RSpec.describe CLI do
                                       "\n 7 | 8 | 9")
     end
 
+    it "prints invalid selection when the user selects the wrong thing" do
+      setup_app("1\n1\n1\n5\n3\n2\n8\n1\n9\n7\n4\n6\n")
+      expect(output.string).to include "Invalid Selection"
+    end
+
     it "goes on until the game has been tied" do
       setup_app("1\n1\n1\n5\n3\n2\n8\n9\n7\n4\n6\n")
       expect(output.string).to include "Game Over"

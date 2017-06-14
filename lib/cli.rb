@@ -17,6 +17,7 @@ class CLI
       choice
     else
       @output.puts "Invalid Selection"
+      get_valid_input(options)
     end
   end
 
