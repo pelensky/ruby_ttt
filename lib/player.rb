@@ -8,6 +8,6 @@ class Player
   end
 
   def choose_available_space(available_spaces)
-    @ui.choose_available_space(available_spaces)
+    @ui.get_valid_input(available_spaces)
   end
 end

@@ -29,6 +29,7 @@ RSpec.describe Game do
   context "After a valid move" do
     it "changes the current player" do
       allow(cli).to receive(:choose_available_space) { 3 }
+      allow(cli).to receive(:get_valid_input) { 3 }
       game.take_turn
       expect(game.current_player.marker).to eq "O"
     end

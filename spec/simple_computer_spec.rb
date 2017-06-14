@@ -1,7 +1,7 @@
 require 'simple_computer'
 
 RSpec.describe SimpleComputer do
-  subject(:computer) { described_class.new }
+  subject(:computer) { described_class.new("X") }
 
   context "The computer" do
     it "selects a random number from the available spaces" do
