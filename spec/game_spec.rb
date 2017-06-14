@@ -49,8 +49,8 @@ RSpec.describe Game do
 
     it "player 2 wins" do
       game.board.spaces = ["X","X","O",4,"O","X","O",8,9]
-    expect(game.game_over?).to be true
-    expect(game.winner).to eq player2
+      expect(game.game_over?).to be true
+      expect(game.winner).to eq player2
     end
   end
 
