@@ -14,10 +14,6 @@ class Game
     change_turns
   end
 
-  def check_space(space)
-    @board.check_space(space)
-  end
-
   def game_over?
     game_tied? || game_won_by?(@player1) || game_won_by?(@player2)
   end
@@ -27,10 +23,6 @@ class Game
   def change_turns
     string_count = @board.spaces.count { |space| space.is_a? String }
     @current_player = string_count.even? ? player1 : player2
-  end
-
-  def space_available?(space)
-    @board.check_available_spaces.include? space
   end
 
   def game_tied?
