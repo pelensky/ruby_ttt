@@ -29,7 +29,6 @@ class Board
     lines
   end
 
-
   private
 
   def split_into_rows
