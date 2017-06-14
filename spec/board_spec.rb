@@ -2,7 +2,7 @@ require 'board'
 
 RSpec.describe Board do
 
-  subject(:board) { described_class.new(3) }
+  subject(:board) { described_class.new((1..9).to_a) }
 
   context "At setup it" do
 

@@ -9,15 +9,9 @@ class Game
     @current_player = player1
   end
 
-  def take_turn(space)
-    if space_available?(space)
-      @board.place_marker(space, @current_player.marker)
-      change_turns
-    end
-  end
-
-  def check_space(space)
-    @board.check_space(space)
+  def take_turn
+    @board = @board.place_marker(@current_player.choose_available_space(@board.check_available_spaces), @current_player.marker)
+    change_turns
   end
 
   def game_over?
@@ -27,11 +21,8 @@ class Game
   private
 
   def change_turns
-    @current_player == @player1 ? @current_player = @player2 : @current_player = @player1
-  end
-
-  def space_available?(space)
-    @board.check_available_spaces.include? space
+    string_count = @board.spaces.count { |space| space.is_a? String }
+    @current_player = string_count.even? ? player1 : player2
   end
 
   def game_tied?

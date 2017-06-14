@@ -1,13 +1,13 @@
-class Player
+class SimpleComputer
 
   attr_reader :marker
 
-  def initialize(marker, ui)
+  def initialize(marker)
     @marker = marker
-    @ui = ui
   end
 
   def choose_available_space(available_spaces)
-    @ui.get_valid_input(available_spaces)
+    available_spaces.sample
   end
+
 end

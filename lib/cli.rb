@@ -1,6 +1,7 @@
 require_relative 'game'
 require_relative 'board'
 require_relative 'player'
+require_relative 'simple_computer'
 
 class CLI
 
@@ -10,26 +11,45 @@ class CLI
     run_app
   end
 
+  def get_valid_input(options)
+    choice = @input.gets.chomp.to_i
+    if options.include? choice
+      choice
+    else
+      @output.puts "Invalid Selection"
+      get_valid_input(options)
+    end
+  end
+
   private
 
   def run_app
-    print_start_of_game
+    start_of_game
     until @game.game_over?
       single_turn
     end
     print_outcome
   end
 
-  def setup_game
-    board = Board.new(3)
-    player1 = Player.new("X")
-    player2 = Player.new("O")
+  def setup_board
+    Board.new((1..9).to_a)
+  end
+
+  def choose_player(marker)
+    print_choose_player(marker)
+    get_valid_input([1,2]) == 1 ? Player.new(marker, self) : SimpleComputer.new(marker)
+  end
+
+  def setup_game(board, player1, player2)
     @game = Game.new(board, player1, player2)
   end
 
-  def print_start_of_game
+  def start_of_game
     print_welcome
-    setup_game
+    board = setup_board
+    player1 = choose_player("X")
+    player2 = choose_player("O")
+    setup_game(board, player1, player2)
     print_board
   end
 
@@ -71,12 +91,18 @@ class CLI
   end
 
   def take_turn
-    @game.take_turn(@input.gets.chomp.to_i)
+    @game.take_turn
   end
 
   def print_outcome
     print_game_over
     @output.puts @game.winner ? "#{@game.winner.marker} is the winner" : "Tied Game"
+  end
+
+  def print_choose_player(marker)
+    @output.puts "Choose player type for #{marker}"
+    @output.puts "1) Human"
+    @output.puts "2) Simple Computer"
   end
 
 end
