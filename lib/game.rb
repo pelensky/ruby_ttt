@@ -18,16 +18,16 @@ class Game
     game_tied? || game_won_by?(@player1) || game_won_by?(@player2)
   end
 
-  private
+  def game_tied?
+    @board.check_available_spaces.empty?
+  end
 
   def change_turns
     string_count = @board.spaces.count { |space| space.is_a? String }
     @current_player = string_count.even? ? player1 : player2
   end
 
-  def game_tied?
-    @board.check_available_spaces.empty?
-  end
+  private
 
   def game_won_by?(player)
     @board.split_into_lines.any? do |line|
