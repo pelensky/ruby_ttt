@@ -25,7 +25,8 @@ class Game
   private
 
   def change_turns
-    @current_player == @player1 ? @current_player = @player2 : @current_player = @player1
+    string_count = @board.spaces.count { |space| space.is_a? String }
+    @current_player = string_count.even? ? player1 : player2
   end
 
   def space_available?(space)
