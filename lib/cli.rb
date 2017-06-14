@@ -23,7 +23,7 @@ class CLI
   private
 
   def run_app
-    print_start_of_game
+    start_of_game
     until @game.game_over?
       single_turn
     end
@@ -36,19 +36,14 @@ class CLI
 
   def choose_player(marker)
     print_choose_player(marker)
-    option = get_valid_input([1,2])
-    if option == 1
-      Player.new(marker, self)
-    else
-      SimpleComputer.new(marker)
-    end
+    get_valid_input([1,2]) == 1 ? Player.new(marker, self) : SimpleComputer.new(marker)
   end
 
   def setup_game(board, player1, player2)
     @game = Game.new(board, player1, player2)
   end
 
-  def print_start_of_game
+  def start_of_game
     print_welcome
     board = setup_board
     player1 = choose_player("X")
