@@ -60,7 +60,7 @@ RSpec.describe CLI do
       expect(output.string).to include "Tied Game"
     end
 
-    xit "results in a tie if two perfect players play together" do
+    it "results in a tie if two perfect players play together" do
       setup_app("3\n3\n")
       expect(output.string).to include "Tied Game"
     end
