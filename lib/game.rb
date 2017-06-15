@@ -27,13 +27,13 @@ class Game
     @current_player = string_count.even? ? player1 : player2
   end
 
-  private
-
   def game_won_by?(player)
     @board.split_into_lines.any? do |line|
       set_winner(player) if line.all? {|space| space == player.marker}
     end
   end
+
+  private
 
   def set_winner(player)
     @winner = player
