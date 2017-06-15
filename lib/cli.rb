@@ -2,6 +2,7 @@ require_relative 'game'
 require_relative 'board'
 require_relative 'player'
 require_relative 'simple_computer'
+require_relative 'perfect_computer'
 
 class CLI
 
@@ -37,7 +38,10 @@ class CLI
 
   def choose_player(marker)
     print_choose_player(marker)
-    get_valid_input([1,2]) == 1 ? Player.new(marker, self) : SimpleComputer.new(marker)
+    choice = get_valid_input([1,2,3])
+    return Player.new(marker, self) if choice == 1
+    return SimpleComputer.new(marker) if choice == 2
+    return PerfectComputer.new(marker) if choice == 3
   end
 
   def setup_game(board, player1, player2)
@@ -103,6 +107,7 @@ class CLI
     @output.puts "Choose player type for #{marker}"
     @output.puts "1) Human"
     @output.puts "2) Simple Computer"
+    @output.puts "3) Expert Computer"
   end
 
 end

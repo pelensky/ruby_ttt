@@ -18,7 +18,7 @@ RSpec.describe CLI do
 
     it "checks if player one is a human or computer" do
       setup_app("2\n2\n")
-      expect(output.string).to include "Choose player type for X\n1) Human\n2) Simple Computer"
+      expect(output.string).to include "Choose player type for X\n1) Human\n2) Simple Computer\n3) Expert Computer"
     end
 
     it "tells X it is their turn" do
@@ -57,6 +57,11 @@ RSpec.describe CLI do
     it "goes on until the game has been tied" do
       setup_app("1\n1\n1\n5\n3\n2\n8\n9\n7\n4\n6\n")
       expect(output.string).to include "Game Over"
+      expect(output.string).to include "Tied Game"
+    end
+
+    it "results in a tie if two perfect players play together" do
+      setup_app("3\n3\n")
       expect(output.string).to include "Tied Game"
     end
 

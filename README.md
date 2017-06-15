@@ -24,3 +24,9 @@ The rules of tic-tac-toe are as follows:
 * A player wins if they claim all the fields in a row, column or diagonal
 * A game is over if a player wins
 * A game is over when all fields are taken
+
+#### References
+
+This implementation uses the Negamax algorithm with Alpha Beta pruning. I found
+[this article](http://www.hamedahmadi.com/gametree/#negamax) to be extremely
+helpful. 

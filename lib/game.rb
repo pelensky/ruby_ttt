@@ -10,7 +10,7 @@ class Game
   end
 
   def take_turn
-    @board = @board.place_marker(@current_player.choose_available_space(@board.check_available_spaces), @current_player.marker)
+    @board = @board.place_marker(@current_player.choose_space(self), @current_player.marker)
     change_turns
   end
 
@@ -18,15 +18,18 @@ class Game
     game_tied? || game_won_by?(@player1) || game_won_by?(@player2)
   end
 
-  private
+  def game_tied?
+    if @board.check_available_spaces.empty? && !game_won_by?(@player1) && !game_won_by?(@player2)
+      @winner = nil
+      true
+    else
+      false
+    end
+  end
 
   def change_turns
     string_count = @board.spaces.count { |space| space.is_a? String }
     @current_player = string_count.even? ? player1 : player2
-  end
-
-  def game_tied?
-    @board.check_available_spaces.empty?
   end
 
   def game_won_by?(player)
@@ -34,6 +37,8 @@ class Game
       set_winner(player) if line.all? {|space| space == player.marker}
     end
   end
+
+  private
 
   def set_winner(player)
     @winner = player
