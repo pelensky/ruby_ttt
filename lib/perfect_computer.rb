@@ -14,33 +14,31 @@ class PerfectComputer
 
   private
 
-  def negamax(game, depth = 0, alpha = -1000, beta = -1000, color = 1)
+  def negamax(game, depth = 0, color = 1)
     return color * score_scenarios(game, depth) if game.game_over?
 
-    best_value = -1000
+    max = -1000
 
     game.board.check_available_spaces.each do |space|
       game.board.place_marker(space, game.current_player.marker)
       game.change_turns
-
-      negamax_value = -negamax(game, depth + 1, -beta, -alpha, -color)
+      negamax_value = -negamax(game, depth+1, -color)
 
       game.board.place_marker(space, space)
       game.change_turns
 
-      best_value = negamax_value if negamax_value > best_value
-      alpha = negamax_value if negamax_value > alpha
-      @best_score[space] = best_value if depth == 0
-      alpha if alpha >= beta
+      max = [max, negamax_value].max
+      @best_score[space] = max if depth == 0
+
     end
 
-    best_value
-
+    max
   end
 
   def score_scenarios(game, depth)
     return 0 if game.game_tied?
-    return 1000 / depth
+    return 1000 / depth if game.game_won_by?(self)
+    return -1000 / depth
   end
 
 end

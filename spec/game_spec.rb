@@ -54,4 +54,24 @@ RSpec.describe Game do
     end
   end
 
+   it "not tied when board is empty" do
+     game.board.spaces = [1,2,3,4,5,6,7,8,9]
+     expect(game.game_tied?).to be false
+   end
+
+   it "not tied when spaces available" do
+     game.board.spaces = ["X","O","X","X","O","O","O","X",9]
+     expect(game.game_tied?).to be false
+   end
+
+   it "the game is tied" do
+     game.board.spaces = ["X","O","X","X","O","O","O","X","X"]
+     expect(game.game_tied?).to be true
+   end
+
+   it "the game is not tied when won and not spaces available" do
+      game.board.spaces = ["X","O","X","X","X","O","X","O","O"]
+      expect(game.game_tied?).to be false
+   end
+
 end

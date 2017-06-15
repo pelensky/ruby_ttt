@@ -1,4 +1,6 @@
 require 'perfect_computer'
+require 'board'
+require 'game'
 
 RSpec.describe PerfectComputer do
   subject(:computer) { described_class.new("X") }
@@ -11,11 +13,11 @@ RSpec.describe PerfectComputer do
     end
 
     it "blocks a win - X" do
-      game = setup_for_player1(["X","X","O",4,"O","X",7,8,9])
+      game = setup_for_player1(["X","X","O",4,"O","X",7,8,"O"])
       expect(computer.choose_space(game)).to eq 7
     end
 
-    xit "blocks a win - O" do
+    it "blocks a win - O" do
       game = setup_for_player2(["X",2,"O",4,"X","X",7,8,"O"])
       expect(computer_o.choose_space(game)).to eq 4
     end
@@ -35,9 +37,14 @@ RSpec.describe PerfectComputer do
       expect(computer.choose_space(game)).to eq 3
     end
 
-    xit "wins the game - O" do
-      game = setup_for_player2(["X",2,"X","X",5,6,"O",8,"9"])
+    it "wins the game - O" do
+      game = setup_for_player2(["X",2,"X","X",5,6,"O",8,"O"])
       expect(computer_o.choose_space(game)).to eq 8
+    end
+
+    it "wins the game again - O" do
+      game = setup_for_player2(["X",2,"O",4,5,6,"X","X","O"])
+      expect(computer_o.choose_space(game)).to eq 6
     end
   end
 

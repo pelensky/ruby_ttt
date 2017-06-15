@@ -19,7 +19,12 @@ class Game
   end
 
   def game_tied?
-    @board.check_available_spaces.empty?
+    if @board.check_available_spaces.empty? && !game_won_by?(@player1) && !game_won_by?(@player2)
+      @winner = nil
+      true
+    else
+      false
+    end
   end
 
   def change_turns
