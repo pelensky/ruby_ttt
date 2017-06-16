@@ -39,6 +39,7 @@ class CLI
   end
 
   def choose_player(marker)
+    clear_screen
     print_choose_player(marker)
     choice = get_valid_input([1,2,3])
     return Player.new(marker, self) if choice == 1
@@ -56,13 +57,13 @@ class CLI
     player1 = choose_player("X")
     player2 = choose_player("O")
     setup_game(board, player1, player2)
-    print_board
   end
 
   def single_turn
+    clear_screen
+    print_board
     print_players_turn
     take_turn
-    print_board
   end
 
   def print_welcome
@@ -102,7 +103,9 @@ class CLI
   end
 
   def print_outcome
+    clear_screen
     print_game_over
+    print_board
     @output.puts @game.winner ? "#{@game.winner.marker} is the winner" : "Tied Game"
   end
 
@@ -116,6 +119,10 @@ class CLI
   def print_board_size
     @output.puts "Choose the number of rows on the board"
     @output.puts "Select 3 or 4"
+  end
+
+  def clear_screen
+    @output.puts "\e[2J\e[f"
   end
 
 end
