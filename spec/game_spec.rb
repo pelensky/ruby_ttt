@@ -37,41 +37,44 @@ RSpec.describe Game do
 
    context "The game is over when" do
     it "all spaces are filled"  do
-      game.board.spaces = ["X","O","X","O","O","X","X","X","O"]
+      game = setup(["X","O","X","O","O","X","X","X","O"])
       expect(game.game_over?).to be true
     end
 
     it "player 1 wins" do
-      game.board.spaces = ["X",2,"O","X","O",6,"X","O","X"]
+      game = setup(["X",2,"O","X","O",6,"X","O","X"])
       expect(game.game_over?).to be true
       expect(game.winner).to eq player1
     end
 
     it "player 2 wins" do
-      game.board.spaces = ["X","X","O",4,"O","X","O",8,9]
+      game = setup(["X","X","O",4,"O","X","O",8,9])
       expect(game.game_over?).to be true
       expect(game.winner).to eq player2
     end
   end
 
    it "not tied when board is empty" do
-     game.board.spaces = [1,2,3,4,5,6,7,8,9]
+     game = setup([1,2,3,4,5,6,7,8,9])
      expect(game.game_tied?).to be false
    end
 
    it "not tied when spaces available" do
-     game.board.spaces = ["X","O","X","X","O","O","O","X",9]
+     game = setup(["X","O","X","X","O","O","O","X",9])
      expect(game.game_tied?).to be false
    end
 
    it "the game is tied" do
-     game.board.spaces = ["X","O","X","X","O","O","O","X","X"]
+     game = setup(["X","O","X","X","O","O","O","X","X"])
      expect(game.game_tied?).to be true
    end
 
    it "the game is not tied when won and not spaces available" do
-      game.board.spaces = ["X","O","X","X","X","O","X","O","O"]
+      game = setup(["X","O","X","X","X","O","X","O","O"])
       expect(game.game_tied?).to be false
    end
 
+   def setup(board)
+      game = Game.new(Board.new(board), player1, player2)
+   end
 end
