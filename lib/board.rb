@@ -2,7 +2,7 @@ class Board
 
   OFFSET = 1
 
-  attr_accessor :spaces
+  attr_accessor :spaces, :number_of_rows
 
   def initialize(spaces)
     @spaces = spaces

@@ -33,7 +33,9 @@ class CLI
   end
 
   def setup_board
-    Board.new((1..9).to_a)
+    print_board_size
+    choice = get_valid_input([3,4])
+    return Board.new((1..(choice*choice)).to_a)
   end
 
   def choose_player(marker)
@@ -72,14 +74,15 @@ class CLI
   end
 
   def print_board
-    split_board = @game.board.spaces.each_slice(3)
+    split_board = @game.board.spaces.each_slice(@game.board.number_of_rows)
     split_board.each_with_index do |row, row_index|
       single_row = ""
       row.each_with_index do |space, space_index|
+        offset_space = space.to_s.length == 1 ? "#{space} " : "#{space}"
         if space_index == split_board.size - 1
-          single_row += " #{space}"
+          single_row += " #{offset_space}"
         else
-          single_row += " #{space} |"
+          single_row += " #{offset_space} |"
         end
       end
       if row_index == row.size - 1
@@ -108,6 +111,11 @@ class CLI
     @output.puts "1) Human"
     @output.puts "2) Simple Computer"
     @output.puts "3) Expert Computer"
+  end
+
+  def print_board_size
+    @output.puts "Choose the number of rows on the board"
+    @output.puts "Select 3 or 4"
   end
 
 end
