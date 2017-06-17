@@ -9,7 +9,7 @@ class PerfectComputer
   def choose_space(game)
     @best_score = {}
     negamax(game)
-    @best_score.max_by {|key, value| value}[0]
+    best_space_to_pick
   end
 
   private
@@ -41,6 +41,10 @@ class PerfectComputer
     return 0 if game.game_tied?
     return 1000 / depth if game.game_won_by?(self)
     return -1000 / depth
+  end
+
+  def best_space_to_pick
+    @best_score.max_by {|key, value| value}[0]
   end
 
 end
