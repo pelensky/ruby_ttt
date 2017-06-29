@@ -1,4 +1,6 @@
 require 'simple_computer'
+require 'board'
+require 'game'
 
 RSpec.describe SimpleComputer do
   subject(:computer) { described_class.new("X") }
@@ -18,7 +20,7 @@ RSpec.describe SimpleComputer do
 
   def setup(board_state)
     board = Board.new(board_state)
-    player2 = PerfectComputer.new("O")
+    player2 = SimpleComputer.new("O")
     Game.new(board, computer, player2)
   end
 
