@@ -2,6 +2,8 @@ class PerfectComputer
 
   attr_reader :marker
 
+  EARLIEST_CHANCE_TO_WIN = 11
+
   def initialize(marker)
     @marker = marker
   end
@@ -9,7 +11,7 @@ class PerfectComputer
   def choose_space(game)
     @best_score = {}
     negamax(game)
-    @best_score.size > 11 ? choose_random_space(game) : best_space_to_pick
+    @best_score.size > EARLIEST_CHANCE_TO_WIN ? choose_random_space(game) : best_space_to_pick
   end
 
   private
