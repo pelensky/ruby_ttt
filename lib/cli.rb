@@ -52,6 +52,7 @@ class CLI
   end
 
   def start_of_game
+    clear_screen
     print_welcome
     board = setup_board
     player1 = choose_player("X")
