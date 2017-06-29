@@ -36,9 +36,9 @@ class CLI
     clear_screen
     print_welcome
     board = setup_board
-    player1 = choose_player("X")
-    player2 = choose_player("O")
-    setup_game(board, player1, player2)
+    player_x = choose_player("X")
+    player_o = choose_player("O")
+    setup_game(board, player_x, player_o)
   end
 
   def single_turn
@@ -63,8 +63,8 @@ class CLI
     return PerfectComputer.new(marker) if choice == 3
   end
 
-  def setup_game(board, player1, player2)
-    @game = Game.new(board, player1, player2)
+  def setup_game(board, player_x, player_o)
+    @game = Game.new(board, player_x, player_o)
   end
 
   def print_welcome
@@ -76,15 +76,33 @@ class CLI
   end
 
   def print_board
-    split_board = @game.board.spaces.each_slice(@game.board.number_of_rows)
-    split_board.each_with_index do |row, row_index|
+    board_split_into_rows = split_board_into_rows
+    board_split_into_rows.each_with_index do |row, row_index|
       single_row = ""
-      row.each_with_index do |space, space_index|
-        offset_space = space.to_s.length == 1 ? "#{space} " : "#{space}"
-        space_index == split_board.size - 1 ? single_row += " #{offset_space}" : single_row += " #{offset_space} |"
-      end
-      @output.puts row_index == row.size - 1 ? single_row : single_row + "\n" + "-" * single_row.length
+      row.each_with_index {|space, space_index| single_row = format_single_row(space, space_index, board_split_into_rows, single_row)}
+      print_board_rows_with_separator(row_index, row, single_row)
     end
+  end
+
+  def split_board_into_rows
+     @game.board.spaces.each_slice(@game.board.number_of_rows)
+  end
+
+  def format_single_row(space, space_index, board_split_into_rows, single_row)
+    formatted_number = add_space_to_single_digit_number(space)
+    single_row = add_separator_where_applicable(space_index, board_split_into_rows, single_row, formatted_number)
+  end
+
+  def add_space_to_single_digit_number(space)
+     space.to_s.length == 1 ? "#{space} " : "#{space}"
+  end
+
+  def add_separator_where_applicable(space_index, board_split_into_rows, single_row, formatted_number)
+    space_index == board_split_into_rows.size - 1 ? single_row += " #{formatted_number}" : single_row += " #{formatted_number} |"
+  end
+
+  def print_board_rows_with_separator(row_index, row, single_row)
+    @output.puts row_index == row.size - 1 ? single_row : single_row + "\n" + "-" * single_row.length
   end
 
   def take_turn

@@ -1,3 +1,3 @@
-require_relative './lib/cli'
+require './lib/cli'
 
 CLI.new
