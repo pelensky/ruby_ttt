@@ -16,8 +16,8 @@ RSpec.describe Game do
     end
 
     it "it initialized with two players" do
-      expect(game.player1).to eq player1
-      expect(game.player2).to eq player2
+      expect(game.player_x).to eq player1
+      expect(game.player_o).to eq player2
     end
 
     it "has a starting player of X" do
@@ -94,6 +94,6 @@ RSpec.describe Game do
 
 
    def setup(board)
-      game = Game.new(Board.new(board), player1, player2)
+      Game.new(Board.new(board), player1, player2)
    end
 end
