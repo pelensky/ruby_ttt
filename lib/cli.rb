@@ -1,8 +1,8 @@
-require_relative 'game'
-require_relative 'board'
-require_relative 'player'
-require_relative 'simple_computer'
-require_relative 'perfect_computer'
+require 'game'
+require 'board'
+require 'player'
+require 'simple_computer'
+require 'perfect_computer'
 
 class CLI
 
@@ -87,11 +87,7 @@ class CLI
           single_row += " #{offset_space} |"
         end
       end
-      if row_index == row.size - 1
-          @output.puts single_row
-      else
-          @output.puts single_row + "\n" + "-" * single_row.length
-      end
+      @output.puts row_index == row.size - 1 ? single_row : single_row + "\n" + "-" * single_row.length
     end
   end
 
