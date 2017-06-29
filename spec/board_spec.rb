@@ -15,21 +15,21 @@ RSpec.describe Board do
   context "A user can" do
 
     it "place a marker in a space" do
-      board.place_marker(1, "X")
-      expect(board.check_space(1)).to eq "X"
+      new_board = board.place_marker(1, "X")
+      expect(new_board.check_space(1)).to eq "X"
     end
 
   end
 
   context "The board" do
     it "tracks available spaces for a normal board" do
-      board.place_marker(1, "X")
-      expect(board.check_available_spaces).to eq [2, 3, 4, 5, 6, 7, 8, 9]
+      new_board = board.place_marker(1, "X")
+      expect(new_board.check_available_spaces).to eq [2, 3, 4, 5, 6, 7, 8, 9]
     end
 
     it "tracks available spaces for a big board" do
-      big_board.place_marker(16, "X")
-      expect(big_board.check_available_spaces).to eq [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13, 14, 15]
+      new_big_board = big_board.place_marker(16, "X")
+      expect(new_big_board.check_available_spaces).to eq [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13, 14, 15]
     end
 
     it "can be split into rows - normal" do
@@ -55,5 +55,12 @@ RSpec.describe Board do
     it "can be split into diagonals - big" do
       expect(big_board.split_into_lines).to include [1,6,11,16], [13,10,7,4]
     end
+  end
+
+  context "Immutibility - The board" do
+    it "doesn't override itself" do
+      board.place_marker(1, "X")
+      expect(board.check_space(1)).to eq 1
+   end
   end
 end
