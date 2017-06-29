@@ -9,7 +9,7 @@ class PerfectComputer
   def choose_space(game)
     @best_score = {}
     negamax(game)
-    best_space_to_pick
+    @best_score.size > 11 ? choose_random_space(game) : best_space_to_pick
   end
 
   private
@@ -23,17 +23,13 @@ class PerfectComputer
       game.board.place_marker(space, game.current_player.marker)
       game.change_turns
       negamax_value = -negamax(game, depth+1, -beta, -alpha, -color)
-
       game.board.place_marker(space, space)
       game.change_turns
-
       max = [max, negamax_value].max
       @best_score[space] = max if depth == 0
       alpha = [alpha, negamax_value].max
       return alpha if alpha >= beta
-
     end
-
     max
   end
 
@@ -45,6 +41,10 @@ class PerfectComputer
 
   def best_space_to_pick
     @best_score.max_by {|key, value| value}[0]
+  end
+
+  def choose_random_space(game)
+    game.board.check_available_spaces.sample
   end
 
 end

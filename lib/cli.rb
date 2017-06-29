@@ -32,6 +32,22 @@ class CLI
     print_outcome
   end
 
+  def start_of_game
+    clear_screen
+    print_welcome
+    board = setup_board
+    player1 = choose_player("X")
+    player2 = choose_player("O")
+    setup_game(board, player1, player2)
+  end
+
+  def single_turn
+    clear_screen
+    print_board
+    print_players_turn
+    take_turn
+  end
+
   def setup_board
     print_board_size
     choice = get_valid_input([3,4])
@@ -49,21 +65,6 @@ class CLI
 
   def setup_game(board, player1, player2)
     @game = Game.new(board, player1, player2)
-  end
-
-  def start_of_game
-    print_welcome
-    board = setup_board
-    player1 = choose_player("X")
-    player2 = choose_player("O")
-    setup_game(board, player1, player2)
-  end
-
-  def single_turn
-    clear_screen
-    print_board
-    print_players_turn
-    take_turn
   end
 
   def print_welcome
@@ -94,12 +95,12 @@ class CLI
     end
   end
 
-  def print_game_over
-    @output.puts "Game Over"
-  end
-
   def take_turn
     @game.take_turn
+  end
+
+  def print_game_over
+    @output.puts "Game Over"
   end
 
   def print_outcome
