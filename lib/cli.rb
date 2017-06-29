@@ -1,8 +1,8 @@
-require 'game'
-require 'board'
-require 'player'
-require 'simple_computer'
-require 'perfect_computer'
+require './lib/game'
+require './lib/board'
+require './lib/player'
+require './lib/simple_computer'
+require './lib/perfect_computer'
 
 class CLI
 
@@ -81,11 +81,7 @@ class CLI
       single_row = ""
       row.each_with_index do |space, space_index|
         offset_space = space.to_s.length == 1 ? "#{space} " : "#{space}"
-        if space_index == split_board.size - 1
-          single_row += " #{offset_space}"
-        else
-          single_row += " #{offset_space} |"
-        end
+        space_index == split_board.size - 1 ? single_row += " #{offset_space}" : single_row += " #{offset_space} |"
       end
       @output.puts row_index == row.size - 1 ? single_row : single_row + "\n" + "-" * single_row.length
     end
