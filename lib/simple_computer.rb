@@ -6,8 +6,8 @@ class SimpleComputer
     @marker = marker
   end
 
-  def choose_space(game)
-    game.board.check_available_spaces.sample
+  def choose_space(board)
+    board.check_available_spaces.sample
   end
 
 end

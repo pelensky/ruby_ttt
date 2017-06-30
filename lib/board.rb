@@ -1,15 +1,16 @@
 class Board
 
   attr_accessor :spaces, :number_of_rows
+  attr_reader :winner
 
   def initialize(spaces)
     @spaces = spaces
     @number_of_rows = Math.sqrt(spaces.count)
   end
 
-  def place_marker(space, marker)
+  def place_marker(space)
     spaces = @spaces.dup
-    spaces[space] = marker
+    spaces[space] = find_marker
     Board.new(spaces)
   end
 
@@ -46,6 +47,17 @@ class Board
     end
   end
 
+  def find_marker
+    string_count = spaces.count { |space| space.is_a? String }
+    string_count.even? ? "X" : "O"
+  end
+
+  def game_won_by?(marker)
+    split_into_lines.any? do |line|
+      set_winner(marker) if line.all? {|space| space == marker}
+    end
+  end
+
   private
 
   def split_into_rows
@@ -67,12 +79,6 @@ class Board
 
   def split_right_diagonal
     (0..@number_of_rows - 1).map {|position| split_into_rows.reverse[position][position]}
-  end
-
-  def game_won_by?(marker)
-    split_into_lines.any? do |line|
-      set_winner(marker) if line.all? {|space| space == marker}
-    end
   end
 
   def set_winner(marker)

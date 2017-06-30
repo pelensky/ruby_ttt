@@ -7,7 +7,7 @@ class Player
     @ui = ui
   end
 
-  def choose_space(game)
-    @ui.place_marker(game.board.check_available_spaces)
+  def choose_space(board)
+    @ui.place_marker(board.check_available_spaces)
   end
 end

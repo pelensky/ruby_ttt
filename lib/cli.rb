@@ -133,7 +133,7 @@ class CLI
     clear_screen
     print_game_over
     print_board
-    @output.puts @game.winner ? "#{@game.winner.marker} is the winner" : "Tied Game"
+    @output.puts @game.board.winner ? "#{@game.board.winner} is the winner" : "Tied Game"
   end
 
   def print_choose_player(marker)
