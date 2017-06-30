@@ -46,6 +46,12 @@ RSpec.describe PerfectComputer do
       board = Board.new(["X",1,"O",3,4,5,"X","X","O"])
       expect(computer_o.choose_space(board)).to eq 5
     end
-  end
 
-end
+      it "selects a random available space at the start of the game" do
+        available_spaces = [0,1,2,3,4,5,6,7,8]
+        board = Board.new(available_spaces)
+        expect(available_spaces).to include computer.choose_space(board)
+      end
+    end
+
+  end
