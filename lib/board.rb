@@ -13,9 +13,6 @@ class Board
     Board.new(spaces)
   end
 
-  def check_space(space)
-    @spaces[space]
-  end
 
   def check_available_spaces
     @spaces.select {|space| space_available?(space)}

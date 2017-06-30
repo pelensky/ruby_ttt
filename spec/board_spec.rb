@@ -17,7 +17,7 @@ RSpec.describe Board do
 
     it "place a marker in a space" do
       new_board = board.place_marker(1)
-      expect(new_board.check_space(1)).to eq "X"
+      expect(new_board.spaces[1]).to eq "X"
     end
 
   end
@@ -65,7 +65,7 @@ RSpec.describe Board do
   context "Immutibility - The board" do
     it "doesn't override itself" do
       board.place_marker(1)
-      expect(board.check_space(1)).to eq 1
+      expect(board.spaces[1]).to eq 1
     end
   end
 
