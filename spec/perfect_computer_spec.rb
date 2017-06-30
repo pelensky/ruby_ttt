@@ -48,17 +48,4 @@ RSpec.describe PerfectComputer do
     end
   end
 
-  def setup_for_player1(board_state)
-    board = Board.new(board_state)
-    player2 = PerfectComputer.new("O")
-    Game.new(board, computer, player2)
-  end
-
-
-  def setup_for_player2(board_state)
-    board = Board.new(board_state)
-    player1 = PerfectComputer.new("X")
-    Game.new(board, player1, computer_o)
-  end
-
 end
