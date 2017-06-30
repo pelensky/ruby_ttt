@@ -1,3 +1,5 @@
+require './lib/simple_computer'
+
 class PerfectComputer
 
   attr_reader :marker
@@ -47,7 +49,7 @@ class PerfectComputer
   end
 
   def choose_random_space(board)
-    board.check_available_spaces.sample
+    SimpleComputer.new(board.find_marker).choose_space(board)
   end
 
 end
