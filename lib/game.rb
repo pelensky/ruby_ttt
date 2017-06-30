@@ -14,28 +14,13 @@ class Game
     change_turns
   end
 
-  def game_over?
-    game_tied? || game_won_by?(@player_x) || game_won_by?(@player_o)
-  end
-
-  def game_tied?
-    if @board.check_available_spaces.empty? && !game_won_by?(@player_x) && !game_won_by?(@player_o)
-      @winner = nil
-      true
-    else
-      false
-    end
-  end
-
   def change_turns
     string_count = @board.spaces.count { |space| space.is_a? String }
     @current_player = string_count.even? ? @player_x : @player_o
   end
 
-  def game_won_by?(player)
-    @board.split_into_lines.any? do |line|
-      set_winner(player) if line.all? {|space| space == player.marker}
-    end
+  def game_over?
+    @board.game_over?
   end
 
   private

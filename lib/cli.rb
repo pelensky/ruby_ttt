@@ -59,7 +59,7 @@ class CLI
   def single_turn
     clear_screen
     print_board
-   print_players_turn
+    print_players_turn
     @game.take_turn
   end
 

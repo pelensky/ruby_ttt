@@ -33,6 +33,19 @@ class Board
     lines
   end
 
+  def game_over?
+    game_tied? || game_won_by?("X") || game_won_by?("O")
+  end
+
+  def game_tied?
+    if check_available_spaces.empty? && !game_won_by?("X") && !game_won_by?("O")
+      @winner = nil
+      true
+    else
+      false
+    end
+  end
+
   private
 
   def split_into_rows
@@ -54,5 +67,15 @@ class Board
 
   def split_right_diagonal
     (0..@number_of_rows - 1).map {|position| split_into_rows.reverse[position][position]}
+  end
+
+  def game_won_by?(marker)
+    split_into_lines.any? do |line|
+      set_winner(marker) if line.all? {|space| space == marker}
+    end
+  end
+
+  def set_winner(marker)
+    @winner = marker
   end
 end
