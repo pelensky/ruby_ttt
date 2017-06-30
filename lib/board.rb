@@ -1,7 +1,6 @@
 class Board
 
-  attr_accessor :spaces, :number_of_rows
-  attr_reader :winner
+  attr_reader :winner, :number_of_rows, :spaces
 
   def initialize(spaces)
     @spaces = spaces
