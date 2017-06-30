@@ -1,7 +1,5 @@
 class Board
 
-  OFFSET = 1
-
   attr_accessor :spaces, :number_of_rows
 
   def initialize(spaces)
@@ -10,17 +8,21 @@ class Board
   end
 
   def place_marker(space, marker)
-    spaces = @spaces
-    spaces[space - OFFSET] = marker
+    spaces = @spaces.dup
+    spaces[space] = marker
     Board.new(spaces)
   end
 
   def check_space(space)
-    @spaces[space - OFFSET]
+    @spaces[space]
   end
 
   def check_available_spaces
-    @spaces.select {|space| space.is_a? Integer}
+    @spaces.select {|space| space_available?(space)}
+  end
+
+  def space_available?(space)
+    space.is_a? Integer
   end
 
   def split_into_lines

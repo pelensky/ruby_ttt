@@ -6,10 +6,25 @@ require './lib/perfect_computer'
 
 class CLI
 
+  OFFSET = 1
+
   def initialize(input=$stdin, output=$stdout)
     @input = input
     @output = output
     run_app
+  end
+
+  def select_board_size(options)
+    get_valid_input(options)
+  end
+
+  def choose_player_type(options)
+    get_valid_input(options)
+  end
+
+  def place_marker(options)
+    offset_spaces = options.map {|space| space + OFFSET}
+    get_valid_input(offset_spaces) - OFFSET
   end
 
   def get_valid_input(options)
@@ -44,20 +59,20 @@ class CLI
   def single_turn
     clear_screen
     print_board
-    print_players_turn
-    take_turn
+   print_players_turn
+    @game.take_turn
   end
 
   def setup_board
     print_board_size
-    choice = get_valid_input([3,4])
-    return Board.new((1..(choice*choice)).to_a)
+    choice = select_board_size([3,4])
+    return Board.new((0..(choice*choice) - OFFSET).to_a)
   end
 
   def choose_player(marker)
     clear_screen
     print_choose_player(marker)
-    choice = get_valid_input([1,2,3])
+    choice = choose_player_type([1,2,3])
     return Player.new(marker, self) if choice == 1
     return SimpleComputer.new(marker) if choice == 2
     return PerfectComputer.new(marker) if choice == 3
@@ -89,6 +104,7 @@ class CLI
   end
 
   def format_single_row(space, space_index, board_split_into_rows, single_row)
+    space = offset_spaces_that_arent_taken(space)
     formatted_number = add_space_to_single_digit_number(space)
     single_row = add_separator_where_applicable(space_index, board_split_into_rows, single_row, formatted_number)
   end
@@ -97,16 +113,16 @@ class CLI
      space.to_s.length == 1 ? "#{space} " : "#{space}"
   end
 
+  def offset_spaces_that_arent_taken(space)
+    @game.board.space_available?(space)? space + OFFSET : space
+  end
+
   def add_separator_where_applicable(space_index, board_split_into_rows, single_row, formatted_number)
     space_index == board_split_into_rows.size - 1 ? single_row += " #{formatted_number}" : single_row += " #{formatted_number} |"
   end
 
   def print_board_rows_with_separator(row_index, row, single_row)
     @output.puts row_index == row.size - 1 ? single_row : single_row + "\n" + "-" * single_row.length
-  end
-
-  def take_turn
-    @game.take_turn
   end
 
   def print_game_over
@@ -133,7 +149,7 @@ class CLI
   end
 
   def clear_screen
-    @output.puts "\e[2J\e[f"
+    # @output.puts "\e[2J\e[f"
   end
 
 end

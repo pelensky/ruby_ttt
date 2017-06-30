@@ -3,6 +3,9 @@ class PerfectComputer
   attr_reader :marker
 
   EARLIEST_CHANCE_TO_WIN = 11
+  STARTING_DEPTH = 0
+  MAXIMUM_DEPTH_TO_CHECK = 6
+  MAXIMUM_SCORE = 1000
 
   def initialize(marker)
     @marker = marker
@@ -16,10 +19,10 @@ class PerfectComputer
 
   private
 
-  def negamax(game, depth = 0, alpha = -1000, beta = 1000, color = 1, max_depth = 6)
+  def negamax(game, depth = STARTING_DEPTH, alpha = -MAXIMUM_SCORE, beta = MAXIMUM_SCORE, color = 1, max_depth = MAXIMUM_DEPTH_TO_CHECK)
     return color * score_scenarios(game, depth) if game.game_over? || depth > max_depth
 
-    max = -1000
+    max = -MAXIMUM_SCORE
 
     game.board.check_available_spaces.each do |space|
       game.board.place_marker(space, game.current_player.marker)
@@ -32,13 +35,14 @@ class PerfectComputer
       alpha = [alpha, negamax_value].max
       return alpha if alpha >= beta
     end
+    
     max
   end
 
   def score_scenarios(game, depth)
     return 0 if game.game_tied?
-    return 1000 / depth if game.game_won_by?(self)
-    return -1000 / depth
+    return MAXIMUM_SCORE / depth if game.game_won_by?(self)
+    return -MAXIMUM_SCORE / depth
   end
 
   def best_space_to_pick

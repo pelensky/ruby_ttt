@@ -8,6 +8,6 @@ class Player
   end
 
   def choose_space(game)
-    @ui.get_valid_input(game.board.check_available_spaces)
+    @ui.place_marker(game.board.check_available_spaces)
   end
 end
