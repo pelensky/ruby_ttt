@@ -23,10 +23,4 @@ class Game
     @board.game_over?
   end
 
-  private
-
-  def set_winner(player)
-    @winner = player
-  end
-
 end
