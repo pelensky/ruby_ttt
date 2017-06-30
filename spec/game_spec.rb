@@ -3,7 +3,7 @@ require 'board'
 require 'player'
 
 RSpec.describe Game do
-  let (:board) { Board.new((1..9).to_a) }
+  let (:board) { Board.new((0..8).to_a) }
   let (:cli) { double('cli') }
   let (:player1) { Player.new("X", cli) }
   let (:player2) { Player.new("O", cli) }
@@ -42,37 +42,37 @@ RSpec.describe Game do
     end
 
     it "player 1 wins" do
-      game = setup(["X",2,"O","X","O",6,"X","O","X"])
+      game = setup(["X",1,"O","X","O",5,"X","O","X"])
       expect(game.game_over?).to be true
       expect(game.winner).to eq player1
     end
 
     it "player 1 wins - big" do
-      game = setup(["X",2,3,4,"O","X",7,8,9,"O","X",12,13,14,"O","X"])
+      game = setup(["X",1,2,3,"O","X",6,7,8,"O","X",11,12,13,"O","X"])
       expect(game.game_over?).to be true
       expect(game.winner).to eq player1
     end
 
     it "player 2 wins" do
-      game = setup(["X","X","O",4,"O","X","O",8,9])
+      game = setup(["X","X","O",3,"O","X","O",7,8])
       expect(game.game_over?).to be true
       expect(game.winner).to eq player2
     end
 
     it "player 2 wins - big" do
-      game = setup(["X",2,3,"O",5,"X",7,"O",9,10,"X","O",13,14,"X","O"])
+      game = setup(["X",1,2,"O",4,"X",6,"O",8,9,"X","O",12,13,"X","O"])
       expect(game.game_over?).to be true
       expect(game.winner).to eq player2
     end
   end
 
    it "not tied when board is empty" do
-     game = setup([1,2,3,4,5,6,7,8,9])
+     game = setup([0,1,2,3,4,5,6,7,8])
      expect(game.game_tied?).to be false
    end
 
    it "not tied when spaces available" do
-     game = setup(["X","O","X","X","O","O","O","X",9])
+     game = setup(["X","O","X","X","O","O","O","X",8])
      expect(game.game_tied?).to be false
    end
 
