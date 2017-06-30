@@ -49,7 +49,7 @@ class PerfectComputer
   end
 
   def choose_random_space(board)
-    SimpleComputer.new(board.find_marker).choose_space(board)
+    SimpleComputer.new(board.current_player_marker).choose_space(board)
   end
 
 end

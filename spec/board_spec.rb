@@ -128,17 +128,17 @@ RSpec.describe Board do
 
    context "Find marker" do
      it "has X play first" do
-       expect(board.find_marker).to eq "X"
+       expect(board.current_player_marker).to eq "X"
      end
 
      it "has O play next" do
        board = Board.new(["X",1,2,3,4,5,6,7,8])
-       expect(board.find_marker).to eq "O"
+       expect(board.current_player_marker).to eq "O"
      end
 
      it "has X play third" do
        board = Board.new(["X","O",2,3,4,5,6,7,8])
-       expect(board.find_marker).to eq "X"
+       expect(board.current_player_marker).to eq "X"
      end
 
    end

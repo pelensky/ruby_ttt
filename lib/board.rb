@@ -9,10 +9,9 @@ class Board
 
   def place_marker(space)
     spaces = @spaces.dup
-    spaces[space] = find_marker
+    spaces[space] = current_player_marker
     Board.new(spaces)
   end
-
 
   def check_available_spaces
     @spaces.select {|space| space_available?(space)}
@@ -43,7 +42,7 @@ class Board
     end
   end
 
-  def find_marker
+  def current_player_marker
     string_count = spaces.count { |space| space.is_a? String }
     string_count.even? ? "X" : "O"
   end
