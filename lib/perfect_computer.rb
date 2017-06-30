@@ -30,7 +30,7 @@ class PerfectComputer
       new_board = board.place_marker(space)
       negamax_value = -negamax(new_board, depth+1, -beta, -alpha, -color)
       max = [max, negamax_value].max
-      @best_score[space] = max if depth == 0
+      @best_score[space] = max if depth == STARTING_DEPTH
       alpha = [alpha, negamax_value].max
       return alpha if alpha >= beta
     end
