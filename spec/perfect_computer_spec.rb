@@ -8,57 +8,49 @@ RSpec.describe PerfectComputer do
 
   context "The computer" do
     it "selects the only available space" do
-      game = setup_for_player1(["X","O","O","O","O","X","X","X",9])
-      expect(computer.choose_space(game)).to eq 9
+      board = Board.new(["X","O","O","O","O","X","X","X",nil])
+      expect(computer.choose_space(board)).to eq 8
     end
 
     it "blocks a win - X" do
-      game = setup_for_player1(["X","X","O",4,"O","X",7,8,"O"])
-      expect(computer.choose_space(game)).to eq 7
+      board = Board.new(["X","X","O",nil,"O","X",nil,nil,"O"])
+      expect(computer.choose_space(board)).to eq 6
     end
 
     it "blocks a win - O" do
-      game = setup_for_player2(["X",2,"O",4,"X","X",7,8,"O"])
-      expect(computer_o.choose_space(game)).to eq 4
+      board = Board.new(["X",nil,"O",nil,"X","X",nil,nil,"O"])
+      expect(computer_o.choose_space(board)).to eq 3
     end
 
     it "wins the game vertically- X" do
-      game = setup_for_player1(["X","O","X",4,"O",6,"O",8,"X"])
-      expect(computer.choose_space(game)).to eq 6
+      board = Board.new(["X","O","X",nil,"O",nil,"O",nil,"X"])
+      expect(computer.choose_space(board)).to eq 5
     end
 
     it "wins the game diagonally - X" do
-      game = setup_for_player1(["X",2,3,"O","X",6,7,"O",9])
-      expect(computer.choose_space(game)).to eq 9
+      board = Board.new(["X",nil,nil,"O","X",nil,nil,"O",nil])
+      expect(computer.choose_space(board)).to eq 8
     end
 
     it "wins the game horizontally - X" do
-      game = setup_for_player1(["X","X",3,"O","O",6,7,8,9])
-      expect(computer.choose_space(game)).to eq 3
+      board = Board.new(["X","X",nil,"O","O",nil,nil,nil,nil])
+      expect(computer.choose_space(board)).to eq 2
     end
 
     it "wins the game - O" do
-      game = setup_for_player2(["X",2,"X","X",5,6,"O",8,"O"])
-      expect(computer_o.choose_space(game)).to eq 8
+      board = Board.new(["X",nil,"X","X",nil,nil,"O",nil,"O"])
+      expect(computer_o.choose_space(board)).to eq 7
     end
 
     it "wins the game again - O" do
-      game = setup_for_player2(["X",2,"O",4,5,6,"X","X","O"])
-      expect(computer_o.choose_space(game)).to eq 6
+      board = Board.new(["X",nil,"O",nil,nil,nil,"X","X","O"])
+      expect(computer_o.choose_space(board)).to eq 5
     end
+
+      it "selects a random available space at the start of the game" do
+        board = Board.new(Array.new(9,nil))
+        expect((0..15).to_a).to include computer.choose_space(board)
+      end
+    end
+
   end
-
-  def setup_for_player1(board_state)
-    board = Board.new(board_state)
-    player2 = PerfectComputer.new("O")
-    Game.new(board, computer, player2)
-  end
-
-
-  def setup_for_player2(board_state)
-    board = Board.new(board_state)
-    player1 = PerfectComputer.new("X")
-    Game.new(board, player1, computer_o)
-  end
-
-end
