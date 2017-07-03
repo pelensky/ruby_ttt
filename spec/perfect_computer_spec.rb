@@ -8,49 +8,48 @@ RSpec.describe PerfectComputer do
 
   context "The computer" do
     it "selects the only available space" do
-      board = Board.new(["X","O","O","O","O","X","X","X",8])
+      board = Board.new(["X","O","O","O","O","X","X","X",nil])
       expect(computer.choose_space(board)).to eq 8
     end
 
     it "blocks a win - X" do
-      board = Board.new(["X","X","O",3,"O","X",6,7,"O"])
+      board = Board.new(["X","X","O",nil,"O","X",nil,nil,"O"])
       expect(computer.choose_space(board)).to eq 6
     end
 
     it "blocks a win - O" do
-      board = Board.new(["X",1,"O",3,"X","X",6,7,"O"])
+      board = Board.new(["X",nil,"O",nil,"X","X",nil,nil,"O"])
       expect(computer_o.choose_space(board)).to eq 3
     end
 
     it "wins the game vertically- X" do
-      board = Board.new(["X","O","X",3,"O",5,"O",7,"X"])
+      board = Board.new(["X","O","X",nil,"O",nil,"O",nil,"X"])
       expect(computer.choose_space(board)).to eq 5
     end
 
     it "wins the game diagonally - X" do
-      board = Board.new(["X",1,2,"O","X",5,6,"O",8])
+      board = Board.new(["X",nil,nil,"O","X",nil,nil,"O",nil])
       expect(computer.choose_space(board)).to eq 8
     end
 
     it "wins the game horizontally - X" do
-      board = Board.new(["X","X",2,"O","O",5,6,7,8])
+      board = Board.new(["X","X",nil,"O","O",nil,nil,nil,nil])
       expect(computer.choose_space(board)).to eq 2
     end
 
     it "wins the game - O" do
-      board = Board.new(["X",1,"X","X",4,5,"O",7,"O"])
+      board = Board.new(["X",nil,"X","X",nil,nil,"O",nil,"O"])
       expect(computer_o.choose_space(board)).to eq 7
     end
 
     it "wins the game again - O" do
-      board = Board.new(["X",1,"O",3,4,5,"X","X","O"])
+      board = Board.new(["X",nil,"O",nil,nil,nil,"X","X","O"])
       expect(computer_o.choose_space(board)).to eq 5
     end
 
       it "selects a random available space at the start of the game" do
-        available_spaces = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-        board = Board.new(available_spaces)
-        expect(available_spaces).to include computer.choose_space(board)
+        board = Board.new(Array.new(9,nil))
+        expect((0..15).to_a).to include computer.choose_space(board)
       end
     end
 
