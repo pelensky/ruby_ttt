@@ -7,4 +7,6 @@ gem "rake"
 gem 'coveralls', require: false
 gem 'sinatra'
 gem 'shotgun'
+gem 'capybara'
+gem 'selenium-webdriver'
 gem 'pry'
