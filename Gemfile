@@ -6,4 +6,5 @@ gem "rspec"
 gem "rake"
 gem 'coveralls', require: false
 gem 'sinatra'
+gem 'shotgun'
 gem 'pry'
