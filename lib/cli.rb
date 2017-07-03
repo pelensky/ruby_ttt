@@ -153,7 +153,7 @@ class CLI
   end
 
   def clear_screen
-    # @output.puts "\e[2J\e[f"
+    @output.puts "\e[2J\e[f"
   end
 
 end
