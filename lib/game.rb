@@ -1,6 +1,6 @@
 class Game
 
-  attr_reader :board, :player_x, :player_o, :current_player, :winner
+  attr_reader :board, :player_x, :player_o, :current_player
 
   def initialize(board, player_x, player_o)
     @board = board
@@ -15,8 +15,7 @@ class Game
   end
 
   def change_turns
-    string_count = @board.spaces.count { |space| space.is_a? String }
-    @current_player = string_count.even? ? @player_x : @player_o
+    @current_player = @board.current_player_marker == "X" ? @player_x : @player_o
   end
 
   def game_over?
