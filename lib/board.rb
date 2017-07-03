@@ -14,11 +14,11 @@ class Board
   end
 
   def check_available_spaces
-    @spaces.select {|space| space_available?(space)}
+    @spaces.each_index.select {|space| space_available?(space)}
   end
 
   def space_available?(space)
-    space.is_a? Integer
+    @spaces[space].nil?
   end
 
   def split_into_lines
@@ -73,7 +73,7 @@ class Board
   end
 
   def split_right_diagonal
-    (0..@number_of_rows - 1).map {|position| split_into_rows.reverse[position][position]}
+    (0..@number_of_rows - 1).map {|position| split_into_rows.reverse[position][position]}.reverse
   end
 
   def set_winner(marker)
