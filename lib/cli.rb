@@ -108,17 +108,12 @@ class CLI
   end
 
   def format_single_row(space, space_index, board_split_into_rows, single_row)
-    space = space.nil? ? offset_spaces_that_arent_taken(space) : space
     formatted_number = add_space_to_single_digit_number(space)
     single_row = add_separator_where_applicable(space_index, board_split_into_rows, single_row, formatted_number)
   end
 
   def add_space_to_single_digit_number(space)
      space.to_s.length == 1 ? "#{space} " : "#{space}"
-  end
-
-  def offset_spaces_that_arent_taken(space)
-    @game.board.space_available?(space)? space + OFFSET : space
   end
 
   def add_separator_where_applicable(space_index, board_split_into_rows, single_row, formatted_number)
