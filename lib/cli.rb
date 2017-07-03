@@ -66,7 +66,7 @@ class CLI
   def setup_board
     print_board_size
     choice = select_board_size([3,4])
-    return Board.new((0..(choice*choice) - OFFSET).to_a)
+    return Board.new(Array.new(choice * choice, nil))
   end
 
   def choose_player(marker)
@@ -91,7 +91,7 @@ class CLI
   end
 
   def print_board
-    board_split_into_rows = split_board_into_rows
+    board_split_into_rows = split_board_into_rows(board_with_index_in_empty_spaces)
     board_split_into_rows.each_with_index do |row, row_index|
       single_row = ""
       row.each_with_index {|space, space_index| single_row = format_single_row(space, space_index, board_split_into_rows, single_row)}
@@ -99,12 +99,16 @@ class CLI
     end
   end
 
-  def split_board_into_rows
-     @game.board.spaces.each_slice(@game.board.number_of_rows)
+  def board_with_index_in_empty_spaces
+    @game.board.spaces.each_with_index.map {|space, index| !space.nil? ? space : index + OFFSET }
+  end
+
+  def split_board_into_rows(spaces)
+     spaces.each_slice(@game.board.number_of_rows)
   end
 
   def format_single_row(space, space_index, board_split_into_rows, single_row)
-    space = offset_spaces_that_arent_taken(space)
+    space = space.nil? ? offset_spaces_that_arent_taken(space) : space
     formatted_number = add_space_to_single_digit_number(space)
     single_row = add_separator_where_applicable(space_index, board_split_into_rows, single_row, formatted_number)
   end
