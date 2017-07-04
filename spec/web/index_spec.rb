@@ -14,4 +14,13 @@ feature "index" do
   scenario "has all elements that will make up the tic tac toe board" do
     (0..8).each { |number| expect(page).to have_css("#" + number.to_s) }
   end
+
+  scenario "set up game" do
+    expect(page).to have_content "Player 'X' is a: "
+    expect(page).to have_select "player_x", options: ["Human", "Simple Computer", "Expert Computer"]
+    expect(page).to have_content "Player 'O' is a: "
+
+  end
+
+
 end
