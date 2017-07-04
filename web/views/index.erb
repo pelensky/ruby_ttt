@@ -3,14 +3,18 @@
 
 <form action="/new-game">
   <label for="player_x"> Player 'X' is a: </label>
-  <select value="player_x">
-    <option id="human">Human</option>
+  <select id="player_x">
+    <option value="human">Human</option>
     <option value="simple_computer">Simple Computer</option>
     <option value="expert_computer">Expert Computer</option>
   </select>
   <label for="player_o"> Player 'O' is a: </label>
-  <input type="text" name="player_o">
-  <input type="submit" value="Start Game">
+  <select id="player_o">
+    <option value="human">Human</option>
+    <option value="simple_computer">Simple Computer</option>
+    <option value="expert_computer">Expert Computer</option>
+  </select>
+  <input type="submit" id="submit" value="Start Game">
 </form>
 
   <table>
