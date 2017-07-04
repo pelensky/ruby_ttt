@@ -1,1 +1,19 @@
 <%= @game.current_player.marker %>, take your turn
+
+<table>
+  <tr>
+    <td id="0"><%= @game.board.spaces[0] %></td>
+    <td id="1"><%= @game.board.spaces[1] %></td>
+    <td id="2"><%= @game.board.spaces[2] %></td>
+  </tr>
+  <tr>
+    <td id="3"><%= @game.board.spaces[3] %></td>
+    <td id="4"><%= @game.board.spaces[4] %></td>
+    <td id="5"><%= @game.board.spaces[5] %></td>
+  </tr>
+  <tr>
+    <td id="6"><%= @game.board.spaces[6] %></td>
+    <td id="7"><%= @game.board.spaces[7] %></td>
+    <td id="8"><%= @game.board.spaces[8] %></td>
+  </tr>
+</table>

@@ -22,15 +22,15 @@ class Web < Sinatra::Base
   end
 
   get '/play' do
-p    @game = session[:game]
+    p @game = session[:game]
+    #@game.take_turn
     erb(:play)
   end
-
 
   def get_player_type(selection, marker)
     return Player.new(marker, nil) if selection == "human"
     return SimpleComputer.new(marker) if selection == "simple_computer"
-    return PerfectComputer.new(marker) if selection == "perfect_computer"
+    return PerfectComputer.new(marker) if selection == "expert_computer"
   end
 
  run! if app_file == $0
