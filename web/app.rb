@@ -14,10 +14,12 @@ class Web < Sinatra::Base
   post '/new-game' do
     x_selection = params[:player_x]
     o_selection = params[:player_o]
+    p get_player_type(x_selection, "X")
     player_x = get_player_type(x_selection, "X")
     player_o = get_player_type(o_selection, "O")
     board = Board.new(Array.new(9))
-    p @game = Game.new(board, player_x, player_o)
+    @game = Game.new(board, player_x, player_o)
+    p @game
     redirect '/play'
   end
 
@@ -27,9 +29,9 @@ class Web < Sinatra::Base
 
 
   def get_player_type(selection, marker)
-    Player.new(marker, self) if selection == "human"
-    SimpleComputer.new(marker) if selection == "simple_computer"
-    PerfectComputer.new(marker) if selection == "perfect_computer"
+    return Player.new(marker, self) if selection == "human"
+    return SimpleComputer.new(marker) if selection == "simple_computer"
+    return PerfectComputer.new(marker) if selection == "perfect_computer"
   end
 
  run! if app_file == $0
