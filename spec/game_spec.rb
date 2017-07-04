@@ -3,7 +3,7 @@ require 'board'
 require 'player'
 
 RSpec.describe Game do
-  let (:board) { Board.new(Array.new(9, nil)) }
+  let (:board) { Board.new(Array.new(9)) }
   let (:cli) { double('cli') }
   let (:player1) { Player.new("X", cli) }
   let (:player2) { Player.new("O", cli) }

@@ -66,7 +66,7 @@ class CLI
   def setup_board
     print_board_size
     choice = select_board_size([3,4])
-    return Board.new(Array.new(choice * choice, nil))
+    return Board.new(Array.new(choice * choice))
   end
 
   def choose_player(marker)
