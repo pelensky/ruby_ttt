@@ -6,30 +6,29 @@ require './lib/simple_computer'
 require './lib/perfect_computer'
 
 class Web < Sinatra::Base
+  enable :sessions
+  set :session_secret, 'super secret'
 
   get '/' do
    erb(:index)
   end
 
   post '/new-game' do
-    x_selection = params[:player_x]
-    o_selection = params[:player_o]
-    p get_player_type(x_selection, "X")
-    player_x = get_player_type(x_selection, "X")
-    player_o = get_player_type(o_selection, "O")
+    player_x = get_player_type(params[:player_x], "X")
+    player_o = get_player_type(params[:player_o], "O")
     board = Board.new(Array.new(9))
-    @game = Game.new(board, player_x, player_o)
-    p @game
+    session[:game] = Game.new(board, player_x, player_o)
     redirect '/play'
   end
 
   get '/play' do
+p    @game = session[:game]
     erb(:play)
   end
 
 
   def get_player_type(selection, marker)
-    return Player.new(marker, self) if selection == "human"
+    return Player.new(marker, nil) if selection == "human"
     return SimpleComputer.new(marker) if selection == "simple_computer"
     return PerfectComputer.new(marker) if selection == "perfect_computer"
   end

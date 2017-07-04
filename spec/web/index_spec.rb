@@ -24,10 +24,9 @@ feature "index" do
   end
 
   scenario "set up game with two humans" do
-    select "Human", :from => "player_x"
-    select "Human", :from => "player_o"
-    click_button "Start Game"
+    new_game_two_human
     expect(current_path).to eq('/play')
   end
+
 
 end
