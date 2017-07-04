@@ -1,19 +1,21 @@
 <link href="<%= url('/css/main.css') %>" rel="stylesheet" type="text/css" />
 <h1>Tic Tac Toe</h1>
 
-<form action="/new-game">
+<form action="/new-game" method="post">
   <label for="player_x"> Player 'X' is a: </label>
-  <select id="player_x">
-    <option value="human">Human</option>
+  <select id="player_x" name="player_x">
+    <option value="human" selected="selected">Human</option>
     <option value="simple_computer">Simple Computer</option>
     <option value="expert_computer">Expert Computer</option>
   </select>
+
   <label for="player_o"> Player 'O' is a: </label>
-  <select id="player_o">
-    <option value="human">Human</option>
+  <select id="player_o" name="player_o">
+    <option value="human" selected="selected">Human</option>
     <option value="simple_computer">Simple Computer</option>
     <option value="expert_computer">Expert Computer</option>
   </select>
+
   <input type="submit" id="submit" value="Start Game">
 </form>
 

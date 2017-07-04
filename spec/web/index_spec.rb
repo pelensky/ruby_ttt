@@ -23,5 +23,11 @@ feature "index" do
     expect(page).to have_button "submit", "Start Game"
   end
 
+  scenario "set up game with two humans" do
+    select "Human", :from => "player_x"
+    select "Human", :from => "player_o"
+    click_button "Start Game"
+    expect(current_path).to eq('/play')
+  end
 
 end
