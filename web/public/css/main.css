@@ -1,5 +1,19 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:500,700);
+
+html {
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4;
+  font-weight: 500;
+  height: 100%;
+}
+
 body {
   text-align: center;
+  color: #222;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  background-image: url("/img/background.png");
   font-size: 2em;
 }
 
@@ -37,4 +51,8 @@ table button {
   background-size: 90%;
   background-repeat:no-repeat;
   background-position: center center;
+}
+
+h1 {
+  font-size: 1.5em;
 }
