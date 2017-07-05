@@ -1,12 +1,12 @@
 require 'game'
 require 'board'
-require 'player'
+require 'human_player_cli'
 
 RSpec.describe Game do
   let (:board) { Board.new(Array.new(9)) }
   let (:cli) { double('cli') }
-  let (:player1) { Player.new("X", cli) }
-  let (:player2) { Player.new("O", cli) }
+  let (:player1) { HumanPlayer.new("X", cli) }
+  let (:player2) { HumanPlayer.new("O", cli) }
   subject(:game) { described_class.new(board, player1, player2) }
 
   context "At setup, the game" do

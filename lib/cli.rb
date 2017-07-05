@@ -1,6 +1,6 @@
 require './lib/game'
 require './lib/board'
-require './lib/player'
+require './lib/human_player_cli'
 require './lib/simple_computer'
 require './lib/perfect_computer'
 
@@ -73,7 +73,7 @@ class CLI
     clear_screen
     print_choose_player(marker)
     choice = choose_player_type([1,2,3])
-    return Player.new(marker, self) if choice == 1
+    return HumanPlayer.new(marker, self) if choice == 1
     return SimpleComputer.new(marker) if choice == 2
     return PerfectComputer.new(marker) if choice == 3
   end
