@@ -4,10 +4,11 @@ class WebPlayer
 
   def initialize(marker, move)
     @marker = marker
+    @move = move
   end
 
   def choose_space(board)
-    move.pop
+    @move.pop if board.check_available_spaces.include? @move[0]
   end
 
 end
