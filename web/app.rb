@@ -8,6 +8,7 @@ require './lib/perfect_computer'
 class Web < Sinatra::Base
   enable :sessions
   set :session_secret, 'super secret'
+  move = []
 
   get '/' do
    erb(:index)
@@ -23,6 +24,7 @@ class Web < Sinatra::Base
 
   get '/play' do
     @game = session[:game]
+    
     erb(:play)
   end
 
@@ -31,7 +33,7 @@ class Web < Sinatra::Base
   end
 
   def get_player_type(selection, marker)
-    return WebPlayer.new(marker) if selection == "human"
+    return WebPlayer.new(marker, []) if selection == "human"
     return SimpleComputer.new(marker) if selection == "simple_computer"
     return PerfectComputer.new(marker) if selection == "expert_computer"
   end

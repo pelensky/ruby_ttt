@@ -1,19 +1,19 @@
 <%= @game.current_player.marker %>, take your turn
-
+<% @updated_board = @game.board.spaces.each_with_index.map {|space, index| !space.nil? ? space : index } %>
 <table>
   <tr>
-    <td id="0"><%= @game.board.spaces[0] %></td>
-    <td id="1"><%= @game.board.spaces[1] %></td>
-    <td id="2"><%= @game.board.spaces[2] %></td>
+    <td id="0"><%= @updated_board[0] %></td>
+    <td id="1"><%= @updated_board[1] %></td>
+    <td id="2"><%= @updated_board[2] %></td>
   </tr>
   <tr>
-    <td id="3"><%= @game.board.spaces[3] %></td>
-    <td id="4"><%= @game.board.spaces[4] %></td>
-    <td id="5"><%= @game.board.spaces[5] %></td>
+    <td id="3"><%= @updated_board[3] %></td>
+    <td id="4"><%= @updated_board[4] %></td>
+    <td id="5"><%= @updated_board[5] %></td>
   </tr>
   <tr>
-    <td id="6"><%= @game.board.spaces[6] %></td>
-    <td id="7"><%= @game.board.spaces[7] %></td>
-    <td id="8"><%= @game.board.spaces[8] %></td>
+    <td id="6"><%= @updated_board[6] %></td>
+    <td id="7"><%= @updated_board[7] %></td>
+    <td id="8"><%= @updated_board[8] %></td>
   </tr>
 </table>
