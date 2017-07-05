@@ -20,6 +20,8 @@ feature "index" do
     expect(page).to have_select "player_x", options: ["Human", "Simple Computer", "Expert Computer"]
     expect(page).to have_content "Player 'O' is a: "
     expect(page).to have_select "player_o", options: ["Human", "Simple Computer", "Expert Computer"]
+    expect(page).to have_content "The board is"
+    expect(page).to have_select "board", options: ["Normal", "Large"]
     expect(page).to have_button "submit", value: "Start Game"
   end
 

@@ -14,7 +14,7 @@ class Web < Sinatra::Base
   end
 
   post '/new-game' do
-    board = Board.new(Array.new(9))
+    board = Board.new(Array.new(params[:board_size].to_i ** 2))
     player_x = get_player_type(params[:player_x], "X", session[:move] = [])
     player_o = get_player_type(params[:player_o], "O", session[:move])
     session[:game] = Game.new(board, player_x, player_o)
