@@ -25,19 +25,17 @@ class Web < Sinatra::Base
     @game = session[:game]
     if !@game.current_player.is_a? WebPlayer
       @game.take_turn
-      redirect '/play'
+      redirect @game.game_over? ? '/outcome' : '/play'
     end
     erb(:play)
   end
 
   post '/play' do
     @game = session[:game]
-    if @game.current_player.is_a? WebPlayer
-      selection = params[:selection].to_i
-      move = session[:move]
-      move.push(selection)
-      redirect '/play' if !@game.board.check_available_spaces.include? selection
-    end
+    move = session[:move]
+    selection = params[:selection].to_i
+    move.push(selection)
+    redirect '/play' if !@game.board.check_available_spaces.include? selection
     @game.take_turn
     redirect @game.game_over? ? '/outcome' : '/play'
   end
