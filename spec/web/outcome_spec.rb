@@ -3,6 +3,11 @@ feature "outcome" do
     new_game_two_human
   end
 
+  scenario "play again" do
+    two_humans_x_wins
+    expect(page).to have_content "Play Again"
+  end
+
   scenario "two humans, x wins" do
     two_humans_x_wins
     expect(page).to have_content "X is the winner"

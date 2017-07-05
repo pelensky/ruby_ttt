@@ -56,3 +56,8 @@ table button {
 h1 {
   font-size: 1.5em;
 }
+
+a {
+  text-decoration: none;
+  color: #222;
+}
