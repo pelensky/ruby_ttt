@@ -3,8 +3,8 @@ require 'board'
 
 RSpec.describe Board do
 
-  subject(:board) { described_class.new(Array.new(9, nil)) }
-  subject(:big_board) { described_class.new(Array.new(16, nil)) }
+  subject(:board) { described_class.new(Array.new(9)) }
+  subject(:big_board) { described_class.new(Array.new(16)) }
   subject(:tied_board) { described_class.new(["X","O","X","X","O","O","O","X","X"]) }
   subject(:tied_big_board) { described_class.new(["X","O","X","X","O","X","O","O","X","O","X","O","X","O","X","O"]) }
 

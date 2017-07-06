@@ -1,0 +1,41 @@
+<form action="/new-game" method="post">
+  <label for="player_x"> Player 'X' is a: </label>
+  <select id="player_x" name="player_x">
+    <option value="human" selected="selected">Human</option>
+    <option value="simple_computer">Simple Computer</option>
+    <option value="expert_computer">Expert Computer</option>
+  </select>
+  <br>
+  <label for="player_o"> Player 'O' is a: </label>
+  <select id="player_o" name="player_o">
+    <option value="human" selected="selected">Human</option>
+    <option value="simple_computer">Simple Computer</option>
+    <option value="expert_computer">Expert Computer</option>
+  </select>
+  <br>
+  <label for="board_size"> The board is: </label>
+  <select id="board_size" name="board_size">
+    <option value="3" selected="selected">Normal</option>
+    <option value="4"> Large </option>
+  </select>
+  <br>
+  <input type="submit" id="submit" value="Start Game">
+</form>
+
+<table>
+  <tr>
+    <td id="0"></td>
+    <td id="1"></td>
+    <td id="2"></td>
+  </tr>
+  <tr>
+    <td id="3"></td>
+    <td id="4"></td>
+    <td id="5"></td>
+  </tr>
+  <tr>
+    <td id="6"></td>
+    <td id="7"></td>
+    <td id="8"></td>
+  </tr>
+</table>

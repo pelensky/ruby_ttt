@@ -1,6 +1,6 @@
-require 'player'
+require 'human_player_cli'
 
-RSpec.describe Player do
+RSpec.describe HumanPlayer do
 
   subject(:player) { described_class.new("X", double("cli")) }
 

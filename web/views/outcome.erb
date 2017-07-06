@@ -1,0 +1,20 @@
+<% if @game.board.winner %>
+  <%= @game.board.winner %> is the winner
+<% else %>
+  Tied Game
+<% end %>
+
+<% @updated_board = @game.board.spaces.each_with_index.map {|space, index| !space.nil? ? space : index } %>
+  <table>
+    <% split_board = @updated_board.each_slice(@game.board.number_of_rows) %>
+    <% split_board.each_with_index do |row, row_index| %>
+      <tr>
+      <%  row.each do |space| %>
+        <td id="td-<%= space %>"> <button type ="submit" name="selection" id="btn-<%= space %>" value="<%= space %>"</td>
+        <% end %>
+       </tr>
+   <% end %>
+  </table>
+
+  <a href="/"> Play Again? </a>
+
