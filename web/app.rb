@@ -1,9 +1,9 @@
 require 'sinatra/base'
-require './lib/game'
-require './lib/board'
+require 'game'
+require 'board'
 require './web/web_player'
-require './lib/simple_computer'
-require './lib/perfect_computer'
+require 'simple_computer'
+require 'perfect_computer'
 
 class Web < Sinatra::Base
   enable :sessions
