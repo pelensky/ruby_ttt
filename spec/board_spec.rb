@@ -1,4 +1,3 @@
-
 require 'board'
 
 RSpec.describe Board do

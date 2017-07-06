@@ -1,8 +1,8 @@
-require './lib/game'
-require './lib/board'
-require './lib/human_player_cli'
-require './lib/simple_computer'
-require './lib/perfect_computer'
+require 'game'
+require 'board'
+require 'human_player_cli'
+require 'simple_computer'
+require 'perfect_computer'
 
 class CLI
 

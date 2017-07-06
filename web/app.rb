@@ -1,9 +1,9 @@
 require 'sinatra/base'
-require './lib/game'
-require './lib/board'
+require 'game'
+require 'board'
 require './web/web_player'
-require './lib/simple_computer'
-require './lib/perfect_computer'
+require 'simple_computer'
+require 'perfect_computer'
 
 class Web < Sinatra::Base
   enable :sessions
@@ -15,29 +15,23 @@ class Web < Sinatra::Base
 
   post '/new-game' do
     board = Board.new(Array.new(params[:board_size].to_i ** 2))
-    player_x = get_player_type(params[:player_x], "X", session[:move] = [])
-    player_o = get_player_type(params[:player_o], "O", session[:move])
+    player_x = create_player(params[:player_x], "X", session[:move_queue] = [])
+    player_o = create_player(params[:player_o], "O", session[:move_queue])
     session[:game] = Game.new(board, player_x, player_o)
     redirect '/play'
   end
 
   get '/play' do
     @game = session[:game]
-    if !@game.current_player.is_a? WebPlayer
-      @game.take_turn
-      redirect @game.game_over? ? '/outcome' : '/play'
-    end
+    take_turn_and_redirect if !@game.current_player.is_a? WebPlayer
     erb(:play)
   end
 
   post '/play' do
     @game = session[:game]
-    move = session[:move]
-    selection = params[:selection].to_i
-    move.push(selection)
-    redirect '/play' if !@game.board.check_available_spaces.include? selection
-    @game.take_turn
-    redirect @game.game_over? ? '/outcome' : '/play'
+    move = session[:move_queue]
+    move.push(params[:selection].to_i)
+    take_turn_and_redirect
   end
 
   get '/outcome' do
@@ -45,10 +39,15 @@ class Web < Sinatra::Base
     erb(:outcome)
   end
 
-  def get_player_type(selection, marker, move)
-    return WebPlayer.new(marker, move) if selection == "human"
+  def create_player(selection, marker, move_queue)
+    return WebPlayer.new(marker, move_queue) if selection == "human"
     return SimpleComputer.new(marker) if selection == "simple_computer"
     return PerfectComputer.new(marker) if selection == "expert_computer"
+  end
+
+  def take_turn_and_redirect
+    @game.take_turn
+    redirect @game.game_over? ? '/outcome' : '/play'
   end
 
  run! if app_file == $0
