@@ -2,13 +2,13 @@ class WebPlayer
 
   attr_reader :marker
 
-  def initialize(marker, move)
+  def initialize(marker, move_queue)
     @marker = marker
-    @move = move
+    @move_queue = move_queue
   end
 
   def choose_space(board)
-    @move.pop
+    @move_queue.pop
   end
 
 end

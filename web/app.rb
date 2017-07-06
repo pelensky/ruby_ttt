@@ -15,8 +15,8 @@ class Web < Sinatra::Base
 
   post '/new-game' do
     board = Board.new(Array.new(params[:board_size].to_i ** 2))
-    player_x = create_player(params[:player_x], "X", session[:move] = [])
-    player_o = create_player(params[:player_o], "O", session[:move])
+    player_x = create_player(params[:player_x], "X", session[:move_queue] = [])
+    player_o = create_player(params[:player_o], "O", session[:move_queue])
     session[:game] = Game.new(board, player_x, player_o)
     redirect '/play'
   end
@@ -32,7 +32,7 @@ class Web < Sinatra::Base
 
   post '/play' do
     @game = session[:game]
-    move = session[:move]
+    move = session[:move_queue]
     selection = params[:selection].to_i
     move.push(selection)
     @game.take_turn
@@ -44,8 +44,8 @@ class Web < Sinatra::Base
     erb(:outcome)
   end
 
-  def create_player(selection, marker, move)
-    return WebPlayer.new(marker, move) if selection == "human"
+  def create_player(selection, marker, move_queue)
+    return WebPlayer.new(marker, move_queue) if selection == "human"
     return SimpleComputer.new(marker) if selection == "simple_computer"
     return PerfectComputer.new(marker) if selection == "expert_computer"
   end
