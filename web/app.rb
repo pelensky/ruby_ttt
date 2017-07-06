@@ -23,20 +23,15 @@ class Web < Sinatra::Base
 
   get '/play' do
     @game = session[:game]
-    if !@game.current_player.is_a? WebPlayer
-      @game.take_turn
-      redirect @game.game_over? ? '/outcome' : '/play'
-    end
+    take_turn_and_redirect if !@game.current_player.is_a? WebPlayer
     erb(:play)
   end
 
   post '/play' do
     @game = session[:game]
     move = session[:move_queue]
-    selection = params[:selection].to_i
-    move.push(selection)
-    @game.take_turn
-    redirect @game.game_over? ? '/outcome' : '/play'
+    move.push(params[:selection].to_i)
+    take_turn_and_redirect
   end
 
   get '/outcome' do
@@ -48,6 +43,11 @@ class Web < Sinatra::Base
     return WebPlayer.new(marker, move_queue) if selection == "human"
     return SimpleComputer.new(marker) if selection == "simple_computer"
     return PerfectComputer.new(marker) if selection == "expert_computer"
+  end
+
+  def take_turn_and_redirect
+    @game.take_turn
+    redirect @game.game_over? ? '/outcome' : '/play'
   end
 
  run! if app_file == $0
