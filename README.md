@@ -19,6 +19,8 @@ There are three types of players, and a game can be played by any combination of
 
 
 #### Web Running instructions
+This can be played on [Heroku](https://ruby-ttt-pelensky.herokuapp.com/).
+Alternatively, you can run it locally by following the instructions below.
 1. Clone the repository by clicking on the green "Clone or Download" button
 2. Navigate to the directory in the command line
 3. Install bundles by running `bundle`
