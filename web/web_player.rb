@@ -8,7 +8,7 @@ class WebPlayer
   end
 
   def choose_space(board)
-    @move.pop if board.check_available_spaces.include? @move[0]
+    @move.pop
   end
 
 end

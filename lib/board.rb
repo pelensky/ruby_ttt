@@ -9,7 +9,7 @@ class Board
 
   def place_marker(space)
     spaces = @spaces.dup
-    spaces[space] = current_player_marker
+    spaces[space] = current_player_marker if space_available?(space)
     Board.new(spaces)
   end
 

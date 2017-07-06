@@ -35,7 +35,6 @@ class Web < Sinatra::Base
     move = session[:move]
     selection = params[:selection].to_i
     move.push(selection)
-    redirect '/play' if !@game.board.check_available_spaces.include? selection
     @game.take_turn
     redirect @game.game_over? ? '/outcome' : '/play'
   end
