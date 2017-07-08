@@ -5,9 +5,6 @@ ruby "2.2.0"
 gem "rspec"
 gem "rake"
 gem 'coveralls', require: false
-gem 'sinatra'
-gem 'shotgun'
-gem 'capybara'
-gem 'selenium-webdriver'
 gem 'ttt_core'
 gem 'ttt_cli'
+gem 'ttt_web'
