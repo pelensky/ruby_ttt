@@ -2,8 +2,8 @@
 source "https://rubygems.org"
 ruby "2.2.0"
 
-gem "rspec"
 gem "rake"
+gem "rspec"
 gem 'coveralls', require: false
 gem 'ttt_core'
 gem 'ttt_cli'
